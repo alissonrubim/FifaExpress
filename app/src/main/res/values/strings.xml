@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FifaExpress</string>
+    <string name="action_settings">Settings</string>
+    <string name="icon_plus">&#xf067;</string>
+    <string name="nome">Nome:</string>
+    <string name="time">Time:</string>
+</resources>
