@@ -1,4 +1,4 @@
-package com.alissonrubim.fifaexpress.Model;
+package com.alissonrubim.fifaexpress.Model.Database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

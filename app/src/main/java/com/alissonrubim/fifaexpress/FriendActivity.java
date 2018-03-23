@@ -1,9 +1,7 @@
 package com.alissonrubim.fifaexpress;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.*;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -13,9 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.alissonrubim.fifaexpress.Model.DAO.FriendDAO;
-import com.alissonrubim.fifaexpress.Model.Database;
+import com.alissonrubim.fifaexpress.Model.Database.Database;
 import com.alissonrubim.fifaexpress.Model.Friend;
-import com.getbase.floatingactionbutton.*;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -62,7 +59,7 @@ public class FriendActivity extends AppCompatActivity {
         ArrayList<String> spinnerArray =  new ArrayList<String>();
         for (Friend t:
                 friends) {
-            spinnerArray.add(t.getName());
+            spinnerArray.add(t.getName() + " - " + t.getTeam().getName());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -75,7 +72,7 @@ public class FriendActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == FriendDetailActivity.IntentId) {
             if (resultCode == RESULT_OK) {
-
+                fillListViewResume();
             }
         }
     }

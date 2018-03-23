@@ -1,9 +1,10 @@
 package com.alissonrubim.fifaexpress.Model.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.alissonrubim.fifaexpress.Model.Database;
+import com.alissonrubim.fifaexpress.Model.Database.Database;
 import com.alissonrubim.fifaexpress.Model.Friend;
 import com.alissonrubim.fifaexpress.Model.Team;
 
@@ -23,7 +24,7 @@ public class FriendDAO implements BaseDAO<Friend>{
     @Override
     public ArrayList<Friend> GetAll() {
         ArrayList<Friend> friends = new ArrayList<Friend>();
-        Cursor c = database.getReadableDatabase().rawQuery("SELECT FriendId, TeamId, Name FROM Team", null);
+        Cursor c = database.getReadableDatabase().rawQuery("SELECT FriendId, TeamId, Name FROM Friend", null);
         if (c.moveToFirst()){
             do {
                 Team team = (new TeamDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("TeamId")));
@@ -42,16 +43,19 @@ public class FriendDAO implements BaseDAO<Friend>{
 
     @Override
     public long Insert(Friend obj) {
-        return 0;
+        ContentValues insertValues = new ContentValues();
+        insertValues.put("Name", obj.getName());
+        insertValues.put("TeamId", obj.getTeam().getTeamId());
+        return database.getWritableDatabase().insert("Friend", null, insertValues);
     }
 
     @Override
     public void Update(Friend obj) {
-
+        //NOT NECESSARY
     }
 
     @Override
     public void Delete(Friend obj) {
-
+        //NOT NECESSARY
     }
 }

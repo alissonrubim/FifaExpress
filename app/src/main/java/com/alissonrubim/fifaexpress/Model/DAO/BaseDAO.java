@@ -1,7 +1,5 @@
 package com.alissonrubim.fifaexpress.Model.DAO;
 
-import com.alissonrubim.fifaexpress.Model.Database;
-
 import java.util.ArrayList;
 
 /**

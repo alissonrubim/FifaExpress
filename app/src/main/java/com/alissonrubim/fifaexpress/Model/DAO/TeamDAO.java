@@ -1,6 +1,6 @@
 package com.alissonrubim.fifaexpress.Model.DAO;
 
-import com.alissonrubim.fifaexpress.Model.Database;
+import com.alissonrubim.fifaexpress.Model.Database.Database;
 import com.alissonrubim.fifaexpress.Model.Team;
 import android.content.ContentValues;
 import android.content.Context;
@@ -54,11 +54,11 @@ public class TeamDAO implements BaseDAO<Team>{
 
     @Override
     public void Update(Team obj) {
-
+        //NOT NECESSARY
     }
 
     @Override
     public void Delete(Team obj) {
-
+        //NOT NECESSARY
     }
 }
