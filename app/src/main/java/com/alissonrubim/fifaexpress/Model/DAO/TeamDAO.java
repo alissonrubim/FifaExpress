@@ -33,6 +33,19 @@ public class TeamDAO implements BaseDAO<Team>{
         return teams;
     }
 
+    public ArrayList<Team> GetAllNotSelected() {
+        ArrayList<Team> teams = new ArrayList<Team>();
+        Cursor c = database.getReadableDatabase().rawQuery("SELECT TeamId, Name FROM Team WHERE TeamId NOT IN (SELECT TeamId FROM Friend)", null);
+        if (c.moveToFirst()){
+            do {
+                teams.add(new Team(c.getInt(c.getColumnIndex("TeamId")), c.getString(c.getColumnIndex("Name"))));
+            } while(c.moveToNext());
+        }
+        c.close();
+        database.close();
+        return teams;
+    }
+
     @Override
     public Team GetById(int id) {
         Team team = null;
@@ -60,5 +73,9 @@ public class TeamDAO implements BaseDAO<Team>{
     @Override
     public void Delete(Team obj) {
         //NOT NECESSARY
+    }
+
+    public static boolean Equals(Team a, Team b){
+        return a.getTeamId() == b.getTeamId();
     }
 }

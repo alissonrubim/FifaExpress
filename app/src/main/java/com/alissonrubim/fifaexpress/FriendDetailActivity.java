@@ -21,7 +21,7 @@ public class FriendDetailActivity extends AppCompatActivity {
     private Button buttonCancel;
     private Spinner spinnerTeam;
     private EditText editTextName;
-    private ArrayList<Team> teamsCache;
+    private ArrayList<Team> availableTeamsCache;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +47,13 @@ public class FriendDetailActivity extends AppCompatActivity {
     }
 
     private void fillSpinnerTeam(){
-        teamsCache = (new TeamDAO(getApplicationContext())).GetAll();
+        availableTeamsCache = (new TeamDAO(getApplicationContext())).GetAllNotSelected();
 
         ArrayList<String> spinnerArray =  new ArrayList<String>();
         for (Team t:
-                teamsCache) {
-            spinnerArray.add(t.getName());
+                availableTeamsCache) {
+                spinnerArray.add(t.getName());
+
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
@@ -63,7 +64,7 @@ public class FriendDetailActivity extends AppCompatActivity {
     }
 
     private void confirm(){
-        Team team = teamsCache.get(spinnerTeam.getSelectedItemPosition());
+        Team team = availableTeamsCache.get(spinnerTeam.getSelectedItemPosition());
         Friend friend = new Friend(-1, team, editTextName.getText().toString());
         (new FriendDAO(getApplicationContext())).Insert(friend);
         setResult(RESULT_OK);
