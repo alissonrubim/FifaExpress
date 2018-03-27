@@ -40,6 +40,13 @@ public class FriendActivity extends AppCompatActivity {
             }
         });
 
+        faPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRoundActivity();
+            }
+        });
+
         fillListViewResume();
     }
 
@@ -48,8 +55,14 @@ public class FriendActivity extends AppCompatActivity {
         startActivityForResult(intent, FriendDetailActivity.IntentId);
     }
 
+    private void showRoundActivity(){
+        Intent intent = new Intent(getApplicationContext(), RoundActivity.class);
+        startActivityForResult(intent, RoundActivity.IntentId);
+    }
+
     private void bindUI(){
         faAddFriend = findViewById(R.id.fabAddFriend);
+        faPlay = findViewById(R.id.fabPlay);
         listViewResume = findViewById(R.id.listViewResume);
     }
 
