@@ -1,12 +1,8 @@
-package com.alissonrubim.fifaexpress.Model.Database;
+package com.alissonrubim.fifaexpress.Model.Connection;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.content.ContentValues;
-import android.widget.ArrayAdapter;
-
-import com.alissonrubim.fifaexpress.Model.DAO.TeamDAO;
 
 import java.util.ArrayList;
 
@@ -15,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class Database extends SQLiteOpenHelper {
-    private static int databaseVersion = 5;
+    private static int databaseVersion = 7;
     private static String databaseName = "fifaexpress.db";
     public static Context Context;
 
@@ -34,7 +30,7 @@ public class Database extends SQLiteOpenHelper {
         super(context, databaseName, null, databaseVersion);
         this.Context = context;
 
-        commands.add(new SQLCommand(1, "CREATE TABLE Team(" +
+        commands.add(new SQLCommand(1, "CREATE TABLE Team(" + //Tabela que guarda os times
                 "TeamId integer not null primary key autoincrement," +
                 "Name text not null" +
                 ");"));
@@ -42,13 +38,25 @@ public class Database extends SQLiteOpenHelper {
         commands.add(new SQLCommand(2, "INSERT INTO Team('Name') VALUES('Vasco');"));
         commands.add(new SQLCommand(3, "INSERT INTO Team('Name') VALUES('Flamengo'), ('Tupi'), ('Santos'), ('Barcelona'), ('Brasil');"));
 
-        commands.add(new SQLCommand(4, "CREATE TABLE Friend(" +
+        commands.add(new SQLCommand(4, "CREATE TABLE Friend(" + //Tabela que guarda os amigos
                 "FriendId integer not null primary key autoincrement," +
                 "TeamId interger not null," +
                 "Name text not null" +
                 ");"));
-        commands.add(new SQLCommand(5, "INSERT INTO Friend('TeamId','Name') VALUES(1,'Zezinho');"));
+        commands.add(new SQLCommand(5, "INSERT INTO Friend('TeamId','Name') VALUES(1,'Zezinho');")); //Tabela que guarda as Rodadas
+        commands.add(new SQLCommand(6, "CREATE TABLE Round(" +
+                "RoundId integer not null primary key autoincrement," +
+                "Finished interger not null" +
+                ");"));
+        commands.add(new SQLCommand(7, "CREATE TABLE RoundMatch(" +  //Tabela que liga Rodada aos Amigos (chamada de Match)
+                "RoundMatchId integer not null primary key autoincrement," +
+                "RoundId interger not null," +
+                "Friend1Id interger not null," +
+                "Friend2Id interger not null," +
+                "Finished interger not null" +
+                ");"));
     }
+
 
 
     @Override

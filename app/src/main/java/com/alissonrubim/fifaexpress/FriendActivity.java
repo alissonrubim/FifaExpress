@@ -11,8 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.alissonrubim.fifaexpress.Model.DAO.FriendDAO;
-import com.alissonrubim.fifaexpress.Model.Database.Database;
+import com.alissonrubim.fifaexpress.Model.DAO.RoundDAO;
+import com.alissonrubim.fifaexpress.Model.Connection.Database;
 import com.alissonrubim.fifaexpress.Model.Friend;
+import com.alissonrubim.fifaexpress.Model.Round;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -32,6 +34,11 @@ public class FriendActivity extends AppCompatActivity {
         Database database = new Database(getApplicationContext());
 
         bindUI();
+
+        Round currentRound = (new RoundDAO(getApplicationContext())).GetNotFinished();
+        if(currentRound != null){
+            showRoundActivity();
+        }
 
         faAddFriend.setOnClickListener(new View.OnClickListener() {
             @Override

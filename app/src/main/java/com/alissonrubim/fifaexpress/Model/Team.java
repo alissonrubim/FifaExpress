@@ -10,11 +10,11 @@ public class Team {
         Name = name;
     }
 
-    public int getTeamId() {
+    public long getTeamId() {
         return TeamId;
     }
 
-    public void setTeamId(int teamId) {
+    public void setTeamId(long teamId) {
         TeamId = teamId;
     }
 
@@ -26,6 +26,6 @@ public class Team {
         Name = name;
     }
 
-    private int TeamId;
+    private long TeamId;
     private String Name;
 }

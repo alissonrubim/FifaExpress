@@ -1,6 +1,6 @@
 package com.alissonrubim.fifaexpress.Model.DAO;
 
-import com.alissonrubim.fifaexpress.Model.Database.Database;
+import com.alissonrubim.fifaexpress.Model.Connection.Database;
 import com.alissonrubim.fifaexpress.Model.Team;
 import android.content.ContentValues;
 import android.content.Context;
@@ -62,7 +62,9 @@ public class TeamDAO implements BaseDAO<Team>{
     public long Insert(Team obj) {
         ContentValues insertValues = new ContentValues();
         insertValues.put("Name", obj.getName());
-        return database.getWritableDatabase().insert("Team", null, insertValues);
+        long id =  database.getWritableDatabase().insert("Team", null, insertValues);
+        obj.setTeamId(id);
+        return id;
     }
 
     @Override

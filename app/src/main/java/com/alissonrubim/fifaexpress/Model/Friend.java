@@ -5,27 +5,22 @@ package com.alissonrubim.fifaexpress.Model;
  */
 
 public class Friend {
-    public Friend(int friendId, com.alissonrubim.fifaexpress.Model.Team team, String name) {
+    private long FriendId;
+    private Team Team;
+    private String Name;
+
+    public Friend(long friendId, com.alissonrubim.fifaexpress.Model.Team team, String name) {
         FriendId = friendId;
-        TeamId = team.getTeamId();
         Team = team;
         Name = name;
     }
 
-    public int getFriendId() {
+    public long getFriendId() {
         return FriendId;
     }
 
-    public void setFriendId(int friendId) {
+    public void setFriendId(long friendId) {
         FriendId = friendId;
-    }
-
-    public int getTeamId() {
-        return TeamId;
-    }
-
-    public void setTeamId(int teamId) {
-        TeamId = teamId;
     }
 
     public com.alissonrubim.fifaexpress.Model.Team getTeam() {
@@ -43,9 +38,4 @@ public class Friend {
     public void setName(String name) {
         Name = name;
     }
-
-    private int FriendId;
-    private int TeamId;
-    private Team Team;
-    private String Name;
 }

@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.alissonrubim.fifaexpress.Model.Database.Database;
+import com.alissonrubim.fifaexpress.Model.Connection.Database;
 import com.alissonrubim.fifaexpress.Model.Friend;
 import com.alissonrubim.fifaexpress.Model.Team;
 
@@ -46,7 +46,9 @@ public class FriendDAO implements BaseDAO<Friend>{
         ContentValues insertValues = new ContentValues();
         insertValues.put("Name", obj.getName());
         insertValues.put("TeamId", obj.getTeam().getTeamId());
-        return database.getWritableDatabase().insert("Friend", null, insertValues);
+        long id = database.getWritableDatabase().insert("Friend", null, insertValues);
+        obj.setFriendId(id);
+        return id;
     }
 
     @Override

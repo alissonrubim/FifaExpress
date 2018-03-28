@@ -5,17 +5,17 @@ package com.alissonrubim.fifaexpress.Model;
  */
 
 public class Player {
+    private int PlayerId;
+    private int TeamId;
+    private Team Team;
+    private String Name;
+
     public Player(int playerId, int teamId, com.alissonrubim.fifaexpress.Model.Team team, String name) {
         PlayerId = playerId;
         TeamId = teamId;
         Team = team;
         Name = name;
     }
-
-    private int PlayerId;
-    private int TeamId;
-    private Team Team;
-    private String Name;
 
     public int getPlayerId() {
         return PlayerId;
