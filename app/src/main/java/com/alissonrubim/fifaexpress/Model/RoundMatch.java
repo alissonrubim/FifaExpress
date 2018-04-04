@@ -16,7 +16,7 @@ public class RoundMatch {
         Friend1 = friend1;
         Friend2 = friend2;
         Finished = finished;
-        Round = Round;
+        Round = round;
     }
 
     public long getRoundMatchId() {

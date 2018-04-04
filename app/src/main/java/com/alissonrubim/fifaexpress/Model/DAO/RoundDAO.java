@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.alissonrubim.fifaexpress.Model.Connection.Database;
+import com.alissonrubim.fifaexpress.Model.Friend;
 import com.alissonrubim.fifaexpress.Model.Round;
+import com.alissonrubim.fifaexpress.Model.Team;
 
 import java.util.ArrayList;
 
@@ -33,12 +35,19 @@ public class RoundDAO implements BaseDAO<Round> {
 
     @Override
     public ArrayList<Round> GetAll() {
-        return null;
+        throw  new UnsupportedOperationException();
     }
 
     @Override
     public Round GetById(int id) {
-        return null;
+        Round round = null;
+        Cursor c = database.getReadableDatabase().rawQuery("SELECT RoundId, Finished FROM Round WHERE RoundId = " + id, null);
+        if (c.moveToFirst()){
+            round = new Round(c.getInt(c.getColumnIndex("RoundId")), c.getInt(c.getColumnIndex("Finished")) == 1);
+        }
+        c.close();
+        database.close();
+        return round;
     }
 
     @Override
@@ -60,6 +69,6 @@ public class RoundDAO implements BaseDAO<Round> {
 
     @Override
     public void Delete(Round obj) {
-
+        throw  new UnsupportedOperationException();
     }
 }

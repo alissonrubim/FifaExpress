@@ -1,7 +1,13 @@
 package com.alissonrubim.fifaexpress;
 
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alissonrubim.fifaexpress.Model.DAO.FriendDAO;
@@ -17,10 +23,14 @@ import java.util.Random;
 
 public class RoundActivity extends AppCompatActivity {
 
+    private Button buttonFinish;
+    private TextView textViewPlayer1Name;
+    private TextView textViewGame;
+    private TextView textViewPlayer2Name;
     public static int IntentId = 200;
 
     private Round currentRound;
-    private ArrayList<RoundMatch> currentRoundMatchs;
+    private RoundMatch currentRoundMatch;
 
 
     @Override
@@ -28,13 +38,61 @@ public class RoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_round);
 
+        bind();
+
+        updateUI();
+
         if(!loadRound()){
             createRound();
         }
+
+        startNextRound();
+
+        buttonFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishRoundMatch();
+            }
+        });
     }
 
+    //Pega a proxima rodada a ser iniciada (null caso nao tenha)
+    private RoundMatch getNextRoundMatch(){
+        return (new RoundMatchDAO(getApplicationContext())).GetNextByRoundId(currentRound.getRoundId());
+    }
 
-    private boolean loadRound(){ //Carrega uma rodada que nao esteja finalizada
+    //Inicia a proxima rodada
+    private void startNextRound(){
+        currentRoundMatch = getNextRoundMatch();
+        if(currentRoundMatch != null){
+            updateUI();
+        }else{
+            finishRound();
+        }
+    }
+
+    private void updateUI(){
+        if(currentRoundMatch != null)
+        {
+            textViewPlayer1Name.setText(currentRoundMatch.getFriend1().getName());
+            textViewPlayer2Name.setText(currentRoundMatch.getFriend2().getName());
+        }
+        else
+        {
+            textViewPlayer1Name.setText("?");
+            textViewPlayer2Name.setText("?");
+        }
+    }
+
+    private void bind(){
+        buttonFinish = findViewById(R.id.buttonFinish);
+        textViewPlayer1Name = findViewById(R.id.textViewPlayer1Name);
+        textViewPlayer2Name = findViewById(R.id.textViewPlayer2Name);
+        textViewGame = findViewById(R.id.textViewGame);
+    }
+
+    //Carrega uma rodada que nao esteja finalizada
+    private boolean loadRound(){
         currentRound = (new RoundDAO(getApplicationContext())).GetNotFinished();
 
         if(currentRound == null) {
@@ -44,6 +102,7 @@ public class RoundActivity extends AppCompatActivity {
         }
     }
 
+    //Pega um Amigo randomicamente
     private Friend getRandonFriend(ArrayList<Friend> allFriends, boolean delete){
         int  n = 0;
         if(allFriends.size() > 1){
@@ -56,13 +115,29 @@ public class RoundActivity extends AppCompatActivity {
         return f;
     }
 
-    private void goBack(){ //Volta pra outra tela
+    //Ao terminar uma Partida
+    private void finishRoundMatch(){
+        currentRoundMatch.setFinished(true);
+        (new RoundMatchDAO(getApplicationContext())).Update(currentRoundMatch);
+
+        Intent intent = new Intent(getApplicationContext(), RoundMatchResultActivity.class);
+        startActivityForResult(intent, RoundMatchResultActivity.IntentId);
+    }
+
+    //Ao terminar todas as partidas
+    private void finishRound(){
+        currentRound.setFinished(true);
+        (new RoundDAO(getApplicationContext())).Update(currentRound);
+    }
+
+    //Volta pra outra tela
+    private void goBack(){
         setResult(RESULT_CANCELED);
         finish();
     }
 
-
-    private void createRound(){ //Cria uma rodada nova
+    //Cria uma rodada nova
+    private void createRound(){
         ArrayList<Friend> allFriends = (new FriendDAO(getApplicationContext())).GetAll();
         if(allFriends.size() < 2){
             Toast.makeText(this, "Número de jogadores insuficientes para iniciar um torneio.", Toast.LENGTH_SHORT).show();
@@ -73,19 +148,18 @@ public class RoundActivity extends AppCompatActivity {
                 Toast.makeText(this, "O jogador " + removedFriend.getName() + " foi removido do torneio!", Toast.LENGTH_SHORT).show();
             }
 
-            Toast.makeText(this, "Sorteando jogadores...", Toast.LENGTH_SHORT).show();
-
             currentRound = new Round(-1, false);
             (new RoundDAO(getApplicationContext())).Insert(currentRound);
 
-            currentRoundMatchs = new ArrayList<RoundMatch>(); //Gera os Matchs dos jogadores
-            for (int i = 0; i < allFriends.size() / 2; i++) {
+            ArrayList<RoundMatch> roundMatchs = new ArrayList<RoundMatch>(); //Gera os Matchs dos jogadores
+            int originalFriendSize = allFriends.size() / 2;
+            for (int i = 0; i < originalFriendSize; i++) {
                 Friend f1 = getRandonFriend(allFriends, true);
                 Friend f2 = getRandonFriend(allFriends, true);
-                currentRoundMatchs.add(new RoundMatch(-1, currentRound, f1, f2, false));
+                roundMatchs.add(new RoundMatch(-1, currentRound, f1, f2, false));
             }
 
-            for (RoundMatch m : currentRoundMatchs
+            for (RoundMatch m : roundMatchs
                     ) {
                 (new RoundMatchDAO(getApplicationContext())).Insert(m);
             }

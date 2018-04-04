@@ -69,15 +69,11 @@ public class TeamDAO implements BaseDAO<Team>{
 
     @Override
     public void Update(Team obj) {
-        //NOT NECESSARY
+        throw  new UnsupportedOperationException();
     }
 
     @Override
     public void Delete(Team obj) {
-        //NOT NECESSARY
-    }
-
-    public static boolean Equals(Team a, Team b){
-        return a.getTeamId() == b.getTeamId();
+        throw  new UnsupportedOperationException();
     }
 }

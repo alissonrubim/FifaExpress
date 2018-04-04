@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class FriendDAO implements BaseDAO<Friend>{
     private Database database;
-
     public FriendDAO(Context context){
         database = new Database(context);
     }
@@ -38,7 +37,15 @@ public class FriendDAO implements BaseDAO<Friend>{
 
     @Override
     public Friend GetById(int id) {
-        return null;
+        Friend friend = null;
+        Cursor c = database.getReadableDatabase().rawQuery("SELECT FriendId, TeamId, Name FROM Friend WHERE FriendId = " + id, null);
+        if (c.moveToFirst()){
+            Team team = (new TeamDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("TeamId")));
+            friend = new Friend(c.getInt(c.getColumnIndex("FriendId")),team, c.getString(c.getColumnIndex("Name")));
+        }
+        c.close();
+        database.close();
+        return friend;
     }
 
     @Override
@@ -53,11 +60,11 @@ public class FriendDAO implements BaseDAO<Friend>{
 
     @Override
     public void Update(Friend obj) {
-        //NOT NECESSARY
+        throw  new UnsupportedOperationException();
     }
 
     @Override
     public void Delete(Friend obj) {
-        //NOT NECESSARY
+        throw  new UnsupportedOperationException();
     }
 }

@@ -2,8 +2,11 @@ package com.alissonrubim.fifaexpress.Model.DAO;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import com.alissonrubim.fifaexpress.Model.Connection.Database;
+import com.alissonrubim.fifaexpress.Model.Friend;
+import com.alissonrubim.fifaexpress.Model.Round;
 import com.alissonrubim.fifaexpress.Model.RoundMatch;
 
 import java.util.ArrayList;
@@ -21,16 +24,30 @@ public class RoundMatchDAO implements BaseDAO<RoundMatch> {
 
     @Override
     public ArrayList<RoundMatch> GetAll() {
-        return null;
+        throw  new UnsupportedOperationException();
     }
 
     public ArrayList<RoundMatch> GetAllByRoundId(long roundId) {
-        return null;
+        throw  new UnsupportedOperationException();
+    }
+
+    public RoundMatch GetNextByRoundId(long roundId){
+        RoundMatch round = null;
+        Cursor c = database.getReadableDatabase().rawQuery("SELECT RoundMatchId, RoundId, Friend1Id, Friend2Id, Finished FROM RoundMatch WHERE Finished = 0 AND RoundId = " + roundId, null);
+        if (c.moveToFirst()){
+            Round r = (new RoundDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("RoundId")));
+            Friend f1 = (new FriendDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("Friend1Id")));
+            Friend f2 = (new FriendDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("Friend2Id")));
+            round = new RoundMatch(c.getInt(c.getColumnIndex("RoundMatchId")), r, f1, f2, c.getInt(c.getColumnIndex("Finished")) == 1);
+        }
+        c.close();
+        database.close();
+        return round;
     }
 
     @Override
     public RoundMatch GetById(int id) {
-        return null;
+        throw  new UnsupportedOperationException();
     }
 
     @Override
@@ -39,19 +56,25 @@ public class RoundMatchDAO implements BaseDAO<RoundMatch> {
         insertValues.put("RoundId", obj.getRound().getRoundId());
         insertValues.put("Friend1Id", obj.getFriend1().getFriendId());
         insertValues.put("Friend2Id", obj.getFriend2().getFriendId());
-        insertValues.put("Fineshed", obj.isFinished() ? 1 : 0);
-        long id = database.getWritableDatabase().insert("Round", null, insertValues);
+        insertValues.put("Finished", obj.isFinished() ? 1 : 0);
+        long id = database.getWritableDatabase().insert("RoundMatch", null, insertValues);
         obj.setRoundMatchId(id);
         return id;
     }
 
     @Override
     public void Update(RoundMatch obj) {
-
+        String[] values = {String.valueOf(obj.getRoundMatchId())};
+        ContentValues insertValues = new ContentValues();
+        insertValues.put("RoundId", obj.getRound().getRoundId());
+        insertValues.put("Friend1Id", obj.getFriend1().getFriendId());
+        insertValues.put("Friend2Id", obj.getFriend2().getFriendId());
+        insertValues.put("Finished", obj.isFinished() ? 1 : 0);
+        database.getWritableDatabase().update("RoundMatch", insertValues, "RoundMatchId = ?", values);
     }
 
     @Override
     public void Delete(RoundMatch obj) {
-
+        throw  new UnsupportedOperationException();
     }
 }

@@ -38,6 +38,13 @@
         tools:layout_editor_absoluteY="8dp">
 
         <TextView
+            android:id="@+id/textViewGame"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:text="Rodada 0 de 0"
+            android:textAlignment="center" />
+
+        <TextView
             android:id="@+id/textViewPlayer1Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
