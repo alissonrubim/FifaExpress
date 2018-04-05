@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.alissonrubim.fifaexpress.Helper.FriendListViewAdapter;
 import com.alissonrubim.fifaexpress.Model.DAO.FriendDAO;
 import com.alissonrubim.fifaexpress.Model.DAO.RoundDAO;
 import com.alissonrubim.fifaexpress.Model.Connection.Database;
@@ -76,14 +77,16 @@ public class FriendActivity extends AppCompatActivity {
     private void fillListViewResume(){
         ArrayList<Friend> friends = (new FriendDAO(getApplicationContext())).GetAll();
 
-        ArrayList<String> spinnerArray =  new ArrayList<String>();
+       /* ArrayList<String> spinnerArray =  new ArrayList<String>();
         for (Friend t:
                 friends) {
             spinnerArray.add(t.getName() + " - " + t.getTeam().getName());
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, spinnerArray);
+                this, android.R.layout.simple_list_item_1, spinnerArray);*/
+
+        FriendListViewAdapter adapter = new FriendListViewAdapter(getApplicationContext(), friends);
 
         listViewResume.setAdapter(adapter);
     }

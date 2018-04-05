@@ -40,20 +40,21 @@ public class Database extends SQLiteOpenHelper {
 
         commands.add(new SQLCommand(4, "CREATE TABLE Friend(" + //Tabela que guarda os amigos
                 "FriendId integer not null primary key autoincrement," +
-                "TeamId interger not null," +
+                "TeamId integer not null," +
                 "Name text not null" +
                 ");"));
         commands.add(new SQLCommand(5, "INSERT INTO Friend('TeamId','Name') VALUES(1,'Zezinho');")); //Tabela que guarda as Rodadas
         commands.add(new SQLCommand(6, "CREATE TABLE Round(" +
                 "RoundId integer not null primary key autoincrement," +
-                "Finished interger not null" +
+                "Finished integer not null" +
                 ");"));
         commands.add(new SQLCommand(7, "CREATE TABLE RoundMatch(" +  //Tabela que liga Rodada aos Amigos (chamada de Match)
                 "RoundMatchId integer not null primary key autoincrement," +
-                "RoundId interger not null," +
-                "Friend1Id interger not null," +
-                "Friend2Id interger not null," +
-                "Finished interger not null" +
+                "RoundId integer not null," +
+                "Friend1Id integer not null," +
+                "Friend2Id integer not null," +
+                "Finished integer not null," +
+                "Number integer not null" +
                 ");"));
     }
 

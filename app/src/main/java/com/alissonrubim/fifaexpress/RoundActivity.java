@@ -71,6 +71,7 @@ public class RoundActivity extends AppCompatActivity {
         }
     }
 
+    //Atualiza informações na tela
     private void updateUI(){
         if(currentRoundMatch != null)
         {
@@ -156,7 +157,7 @@ public class RoundActivity extends AppCompatActivity {
             for (int i = 0; i < originalFriendSize; i++) {
                 Friend f1 = getRandonFriend(allFriends, true);
                 Friend f2 = getRandonFriend(allFriends, true);
-                roundMatchs.add(new RoundMatch(-1, currentRound, f1, f2, false));
+                roundMatchs.add(new RoundMatch(-1, currentRound, f1, f2, (i+1), false));
             }
 
             for (RoundMatch m : roundMatchs

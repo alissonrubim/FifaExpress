@@ -9,14 +9,16 @@ public class RoundMatch {
     private Round Round;
     private Friend Friend1;
     private Friend Friend2;
+    private int Number;
     private boolean Finished;
 
-    public RoundMatch(long roundMatchId, Round round, Friend friend1, Friend friend2, boolean finished) {
+    public RoundMatch(long roundMatchId, Round round, Friend friend1, Friend friend2, int number, boolean finished) {
         RoundMatchId = roundMatchId;
         Friend1 = friend1;
         Friend2 = friend2;
         Finished = finished;
         Round = round;
+        Number = number;
     }
 
     public long getRoundMatchId() {
@@ -57,6 +59,14 @@ public class RoundMatch {
 
     public void setFinished(boolean finished) {
         Finished = finished;
+    }
+
+    public int getNumber() {
+        return Number;
+    }
+
+    public void setNumber(int number) {
+        Number = number;
     }
 
 }

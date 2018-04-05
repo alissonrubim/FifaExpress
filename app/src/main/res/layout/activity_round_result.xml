@@ -24,6 +24,11 @@
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="8dp">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="107dp"
+            app:srcCompat="@drawable/if_trophy_1054950" />
+
         <TextView
             android:id="@+id/textViewFriendName"
             android:layout_width="match_parent"
@@ -67,7 +72,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fulano"
+            android:text="Fulano, jogador do Flamengo"
             android:textAlignment="center"
             android:textSize="18sp" />
     </LinearLayout>
