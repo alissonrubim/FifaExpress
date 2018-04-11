@@ -1,10 +1,14 @@
 package com.alissonrubim.fifaexpress.Model;
 
+import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchGoalDAO;
+
+import java.io.Serializable;
+
 /**
  * Created by alissonrubim on 27/03/2018.
  */
 
-public class RoundMatch {
+public class RoundMatch implements BaseModel {
     private long RoundMatchId;
     private Round Round;
     private Friend Friend1;

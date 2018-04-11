@@ -4,7 +4,7 @@ package com.alissonrubim.fifaexpress.Model;
  * Created by alissonrubim on 22/03/2018.
  */
 
-public class Friend {
+public class Friend implements BaseModel{
     private long FriendId;
     private Team Team;
     private String Name;

@@ -4,15 +4,13 @@ package com.alissonrubim.fifaexpress.Model;
  * Created by alissonrubim on 23/03/2018.
  */
 
-public class Player {
+public class Player implements BaseModel {
     private int PlayerId;
-    private int TeamId;
     private Team Team;
     private String Name;
 
-    public Player(int playerId, int teamId, com.alissonrubim.fifaexpress.Model.Team team, String name) {
+    public Player(int playerId, com.alissonrubim.fifaexpress.Model.Team team, String name) {
         PlayerId = playerId;
-        TeamId = teamId;
         Team = team;
         Name = name;
     }
@@ -23,14 +21,6 @@ public class Player {
 
     public void setPlayerId(int playerId) {
         PlayerId = playerId;
-    }
-
-    public int getTeamId() {
-        return TeamId;
-    }
-
-    public void setTeamId(int teamId) {
-        TeamId = teamId;
     }
 
     public com.alissonrubim.fifaexpress.Model.Team getTeam() {

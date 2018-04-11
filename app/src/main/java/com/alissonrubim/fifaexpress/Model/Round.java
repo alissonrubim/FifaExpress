@@ -4,7 +4,7 @@ package com.alissonrubim.fifaexpress.Model;
  * Created by alissonrubim on 27/03/2018.
  */
 
-public class Round {
+public class Round implements BaseModel{
     private long RoundId;
     private boolean Finished;
 

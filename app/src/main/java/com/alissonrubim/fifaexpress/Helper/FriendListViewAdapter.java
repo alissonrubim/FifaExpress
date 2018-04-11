@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.alissonrubim.fifaexpress.Model.Friend;
 import com.alissonrubim.fifaexpress.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
@@ -50,17 +52,20 @@ public class FriendListViewAdapter extends BaseAdapter{
             convertView = layoutInflater.inflate(R.layout.layout_friend_item, null);
             line = new FriendListViewLine();
             line.textViewFriendName = convertView.findViewById(R.id.textViewFriendName);
+            line.textViewTeamName = convertView.findViewById(R.id.textViewTeamName);
         }else{
             line = (FriendListViewLine) convertView.getTag();
         }
 
         Friend f = (Friend) getItem(position);
         line.textViewFriendName.setText(f.getName());
+        line.textViewTeamName.setText(f.getTeam().getName());
 
         return convertView;
     }
 
     class FriendListViewLine {
         public TextView textViewFriendName;
+        public TextView textViewTeamName;
     }
 }

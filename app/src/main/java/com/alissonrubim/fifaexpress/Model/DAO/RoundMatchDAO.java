@@ -33,7 +33,7 @@ public class RoundMatchDAO implements BaseDAO<RoundMatch> {
 
     public RoundMatch GetNextByRoundId(long roundId){
         RoundMatch round = null;
-        Cursor c = database.getReadableDatabase().rawQuery("SELECT RoundMatchId, RoundId, Friend1Id, Friend2Id, Finished, Number FROM RoundMatch WHERE Finished = 0 AND RoundId = " + roundId, null);
+        Cursor c = database.getReadableDatabase().rawQuery("SELECT RoundMatchId, RoundId, Friend1Id, Friend2Id, Finished, Number FROM RoundMatch WHERE Finished = 0 AND RoundId = " + roundId + " ORDER BY Number", null);
         if (c.moveToFirst()){
             Round r = (new RoundDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("RoundId")));
             Friend f1 = (new FriendDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("Friend1Id")));
@@ -43,6 +43,22 @@ public class RoundMatchDAO implements BaseDAO<RoundMatch> {
         c.close();
         database.close();
         return round;
+    }
+
+    public boolean HasNextRoundMatch(long roundId){
+        RoundMatch next = GetNextByRoundId(roundId);
+        return next != null;
+    }
+
+    public int GetCounByRoundId(long roundId){
+        int count = 0;
+        Cursor c = database.getReadableDatabase().rawQuery("SELECT COUNT(RoundMatchId) as Count FROM RoundMatch WHERE RoundId = " + roundId, null);
+        if (c.moveToFirst()){
+            count = c.getInt(c.getColumnIndex("Count"));
+        }
+        c.close();
+        database.close();
+        return count;
     }
 
     @Override

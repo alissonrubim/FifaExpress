@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 
 public class Database extends SQLiteOpenHelper {
-    private static int databaseVersion = 7;
+    private static int databaseVersion = 13;
     private static String databaseName = "fifaexpress.db";
     public static Context Context;
 
@@ -55,6 +55,21 @@ public class Database extends SQLiteOpenHelper {
                 "Friend2Id integer not null," +
                 "Finished integer not null," +
                 "Number integer not null" +
+                ");"));
+        commands.add(new SQLCommand(8, "CREATE TABLE Player(" +  //Tabela de jogadores (dos Times)
+                "PlayerId integer not null primary key autoincrement," +
+                "TeamId integer not null," +
+                "Name integer not null" +
+                ");"));
+        commands.add(new SQLCommand(9, "INSERT INTO Player('TeamId','Name') VALUES(1,'Ze Chuteira'),(1, 'Fernando Canhoto'),(1, 'Euclides Matagal');"));
+        commands.add(new SQLCommand(10, "INSERT INTO Player('TeamId','Name') VALUES(2,'João Martinez'),(2, 'Federico Pau de Cebo'),(2, 'Geremias Arteziano');"));
+        commands.add(new SQLCommand(11, "INSERT INTO Player('TeamId','Name') VALUES(3,'Rafael Mão de Alface'),(3, 'Pedrinho Pernambuco'),(3, 'Joaquim Lamentável');"));
+        commands.add(new SQLCommand(11, "INSERT INTO Player('TeamId','Name') VALUES(4,'Pedro Mamão'),(4, 'Fernando Paraibano'),(4, 'Artur Engenheiro');"));
+        commands.add(new SQLCommand(11, "INSERT INTO Player('TeamId','Name') VALUES(5,'Wanderley Gigante'),(5, 'Odilon Meia Bomba'),(5, 'Adilson Pega Pau');"));
+        commands.add(new SQLCommand(12, "INSERT INTO Player('TeamId','Name') VALUES(6,'Adiano Reinador'),(6, 'Luiz Lacerda'),(6, 'Genilson Talento');"));
+        commands.add(new SQLCommand(13, "CREATE TABLE RoundMatchGoal(" +  //Tabela que marca os gols da partida
+                "PlayerId integer not null," +
+                "RoundMatchId integer not null" +
                 ");"));
     }
 

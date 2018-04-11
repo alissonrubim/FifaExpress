@@ -25,6 +25,17 @@ public class FriendActivity extends AppCompatActivity {
     private FloatingActionButton faPlay;
     private ListView listViewResume;
 
+
+    /*
+        Ainda falta ser feito:
+        [ ] Registrar Gol
+        [ ] Marcar numero da RoundMatch
+        [ ] Terminar RoundMatch
+
+
+     */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +77,7 @@ public class FriendActivity extends AppCompatActivity {
     private void showRoundActivity(){
         Intent intent = new Intent(getApplicationContext(), RoundActivity.class);
         startActivityForResult(intent, RoundActivity.IntentId);
+        finish(); //Fecha este activity (impede o go back)
     }
 
     private void bindUI(){
@@ -76,18 +88,7 @@ public class FriendActivity extends AppCompatActivity {
 
     private void fillListViewResume(){
         ArrayList<Friend> friends = (new FriendDAO(getApplicationContext())).GetAll();
-
-       /* ArrayList<String> spinnerArray =  new ArrayList<String>();
-        for (Friend t:
-                friends) {
-            spinnerArray.add(t.getName() + " - " + t.getTeam().getName());
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, spinnerArray);*/
-
         FriendListViewAdapter adapter = new FriendListViewAdapter(getApplicationContext(), friends);
-
         listViewResume.setAdapter(adapter);
     }
 

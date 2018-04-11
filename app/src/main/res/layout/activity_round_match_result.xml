@@ -6,14 +6,33 @@
     android:layout_height="match_parent"
     tools:context="com.alissonrubim.fifaexpress.RoundMatchResultActivity">
 
+    <TextView
+        android:id="@+id/textViewGame"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:text="Rodada 0 de 0"
+        android:textAlignment="center" />
+
     <Button
         android:id="@+id/buttonNextMatch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Iniciar Próxima Partida"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonShowRoundResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Exibir resultado do torneio"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

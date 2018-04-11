@@ -4,7 +4,7 @@ package com.alissonrubim.fifaexpress.Model;
  * Created by alissonrubim on 22/03/2018.
  */
 
-public class Team {
+public class Team implements BaseModel{
     public Team(int teamId, String name) {
         TeamId = teamId;
         Name = name;

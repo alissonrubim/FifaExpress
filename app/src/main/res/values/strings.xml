@@ -4,4 +4,6 @@
     <string name="icon_plus">&#xf067;</string>
     <string name="nome">Nome:</string>
     <string name="time">Time:</string>
+    <string name="amigo">Amigo</string>
+    <string name="jogador">Jogador</string>
 </resources>
