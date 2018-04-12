@@ -46,6 +46,7 @@ public class FriendDetailActivity extends AppCompatActivity {
         fillSpinnerTeam();
     }
 
+    //Preenche o spinner com os times
     private void fillSpinnerTeam(){
         availableTeamsCache = (new TeamDAO(getApplicationContext())).GetAllNotSelected();
 
@@ -63,6 +64,7 @@ public class FriendDetailActivity extends AppCompatActivity {
         spinnerTeam.setAdapter(adapter);
     }
 
+    //Confirma a tela (gravando o amigo no banco)
     private void confirm(){
         Team team = availableTeamsCache.get(spinnerTeam.getSelectedItemPosition());
         Friend friend = new Friend(-1, team, editTextName.getText().toString());
@@ -71,6 +73,7 @@ public class FriendDetailActivity extends AppCompatActivity {
         finish();
     }
 
+    //Cancela a tela
     private void cancel(){
         setResult(RESULT_CANCELED);
         finish();

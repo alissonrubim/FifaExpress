@@ -20,10 +20,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".FriendDetailActivity" />
-        <activity android:name=".RoundActivity"/>
+        <activity android:name=".RoundMatchActivity" />
         <activity android:name=".RoundResultActivity" />
         <activity android:name=".RoundMatchResultActivity" />
-        <activity android:name=".RegisterGoalActivity"></activity>
+        <activity android:name=".RegisterGoalActivity" />
+        <activity android:name=".RoundActivity"></activity>
     </application>
 
 </manifest>

@@ -2,7 +2,7 @@
     <string name="app_name">FifaExpress</string>
     <string name="action_settings">Settings</string>
     <string name="icon_plus">&#xf067;</string>
-    <string name="nome">Nome:</string>
+    <string name="nome">Nome do amigo:</string>
     <string name="time">Time:</string>
     <string name="amigo">Amigo</string>
     <string name="jogador">Jogador</string>

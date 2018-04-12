@@ -7,7 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.alissonrubim.fifaexpress.Helper.FriendListViewAdapter;
@@ -27,10 +26,11 @@ public class FriendActivity extends AppCompatActivity {
 
 
     /*
-        Ainda falta ser feito:
-        [ ] Registrar Gol
-        [ ] Marcar numero da RoundMatch
-        [ ] Terminar RoundMatch
+        Trocar o RegistrarGol para uma MESNGEM CUSTOMIZADA
+             Ao lado de cada jogador, colocar uma botao que abre customizada com um spinner perguntando qual jogador marcou o gol
+        Lista de partidas
+            Ter um jeito de mostrar todas as partidas que serao jogadas (botar no final o botao de encerrar torneio)
+        Remover botao de proxima partida
 
 
      */
@@ -69,11 +69,13 @@ public class FriendActivity extends AppCompatActivity {
         fillListViewResume();
     }
 
+    //Abre a activity de detalhe do amigo
     private void showFriendDetailActivity(){
         Intent intent = new Intent(getApplicationContext(), FriendDetailActivity.class);
         startActivityForResult(intent, FriendDetailActivity.IntentId);
     }
 
+    //Abre a activity de Round
     private void showRoundActivity(){
         Intent intent = new Intent(getApplicationContext(), RoundActivity.class);
         startActivityForResult(intent, RoundActivity.IntentId);
@@ -86,6 +88,7 @@ public class FriendActivity extends AppCompatActivity {
         listViewResume = findViewById(R.id.listViewResume);
     }
 
+    //Preenche a lista resumo com os amigos
     private void fillListViewResume(){
         ArrayList<Friend> friends = (new FriendDAO(getApplicationContext())).GetAll();
         FriendListViewAdapter adapter = new FriendListViewAdapter(getApplicationContext(), friends);
@@ -94,7 +97,7 @@ public class FriendActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FriendDetailActivity.IntentId) {
+        if (requestCode == FriendDetailActivity.IntentId) { //Quando vier da tela de detalhe do amigo
             if (resultCode == RESULT_OK) {
                 fillListViewResume();
             }

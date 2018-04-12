@@ -1,139 +1,54 @@
 package com.alissonrubim.fifaexpress;
 
-import android.content.Intent;
-import android.os.Parcelable;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.alissonrubim.fifaexpress.Helper.RoundListViewAdapter;
 import com.alissonrubim.fifaexpress.Model.DAO.FriendDAO;
 import com.alissonrubim.fifaexpress.Model.DAO.RoundDAO;
 import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchDAO;
-import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchGoalDAO;
 import com.alissonrubim.fifaexpress.Model.Friend;
 import com.alissonrubim.fifaexpress.Model.Round;
 import com.alissonrubim.fifaexpress.Model.RoundMatch;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 public class RoundActivity extends AppCompatActivity {
-
-    private Button buttonFinish;
-    private Button buttonGoal;
-    private TextView textViewPlayer1Name;
-    private TextView textViewPlayer1Goals;
-    private TextView textViewPlayer2Goals;
-    private TextView textViewGame;
-    private TextView textViewPlayer2Name;
-    public static int IntentId = 200;
+    public static final int IntentId = 700;
 
     private Round currentRound;
-    private RoundMatch currentRoundMatch;
-
+    private ListView listViewResume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_round);
 
-        bind();
-
-        updateUI();
-
         if(!loadRound()){
             createRound();
         }
 
-        startNextRound();
-
-        buttonFinish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finishRoundMatch();
-            }
-        });
-
-        buttonGoal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showRegisterGoalActivity();
-            }
-        });
-    }
-
-    //Abre a activity de RegisterGoal
-    private void showRegisterGoalActivity(){
-        Intent intent = new Intent(getApplicationContext(), RegisterGoalActivity.class);
-        intent.putExtra("RoundMatch", this.currentRoundMatch);
-        startActivityForResult(intent, RegisterGoalActivity.IntentId);
-    }
-
-    //Pega a proxima rodada a ser iniciada (null caso nao tenha)
-    private RoundMatch getNextRoundMatch(){
-        return (new RoundMatchDAO(getApplicationContext())).GetNextByRoundId(currentRound.getRoundId());
-    }
-
-    //Inicia a proxima rodada
-    private void startNextRound(){
-        currentRoundMatch = getNextRoundMatch();
-        if(currentRoundMatch != null){
-            updateUI();
-        }else{
-            finishRound();
-        }
-    }
-
-    private int getTotalGoalsByFriend(Friend friend){
-        RoundMatchGoalDAO dao = new RoundMatchGoalDAO(getApplicationContext());
-        return dao.GetTotalGoalsByFriend(friend, currentRoundMatch);
-    }
-
-    //Atualiza informações na tela
-    private void updateUI(){
-        if(currentRoundMatch != null)
-        {
-            textViewPlayer1Name.setText(currentRoundMatch.getFriend1().getName());
-            textViewPlayer2Name.setText(currentRoundMatch.getFriend2().getName());
-            textViewPlayer1Goals.setText(Integer.toString(getTotalGoalsByFriend(currentRoundMatch.getFriend1())));
-            textViewPlayer2Goals.setText(Integer.toString(getTotalGoalsByFriend(currentRoundMatch.getFriend2())));
-            textViewGame.setText("Rodada "+currentRoundMatch.getNumber()+" de " + (new RoundMatchDAO(getApplicationContext()).GetCounByRoundId(currentRound.getRoundId())));
-        }
-        else
-        {
-            textViewPlayer1Name.setText("?");
-            textViewPlayer2Name.setText("?");
-            textViewPlayer1Goals.setText("0");
-            textViewPlayer2Goals.setText("0");
-            textViewGame.setText("Rodada 0 de 0");
-        }
+        fillListViewResume();
     }
 
     private void bind(){
-        buttonFinish = findViewById(R.id.buttonFinish);
-        textViewPlayer1Name = findViewById(R.id.textViewPlayer1Name);
-        textViewPlayer2Name = findViewById(R.id.textViewPlayer2Name);
-        textViewGame = findViewById(R.id.textViewGame);
-        buttonGoal = findViewById(R.id.buttonGoal);
-        textViewPlayer1Goals = findViewById(R.id.textViewPlayer1Goals);
-        textViewPlayer2Goals = findViewById(R.id.textViewPlayer2Goals);
+        listViewResume = findViewById(R.id.listViewResume);
     }
 
-    //Carrega uma rodada que nao esteja finalizada
-    private boolean loadRound(){
-        currentRound = (new RoundDAO(getApplicationContext())).GetNotFinished();
+    //Preenche a lista resumo com os rounds
+    private void fillListViewResume(){
+        ArrayList<RoundMatch> rounds = (new RoundMatchDAO(getApplicationContext())).GetAllByRoundId(currentRound.getRoundId());
+        RoundListViewAdapter adapter = new RoundListViewAdapter(getApplicationContext(), rounds);
+        listViewResume.setAdapter(adapter);
+    }
 
-        if(currentRound == null) {
-            return false;
-        }else{
-            return true;
-        }
+    //Volta pra outra tela
+    private void goBack(){
+        setResult(RESULT_CANCELED);
+        finish();
     }
 
     //Pega um Amigo randomicamente
@@ -149,31 +64,15 @@ public class RoundActivity extends AppCompatActivity {
         return f;
     }
 
-    //Ao terminar uma Partida
-    private void finishRoundMatch(){
-        currentRoundMatch.setFinished(true);
-        (new RoundMatchDAO(getApplicationContext())).Update(currentRoundMatch);
+    //Carrega uma rodada que nao esteja finalizada
+    private boolean loadRound(){
+        currentRound = (new RoundDAO(getApplicationContext())).GetNotFinished();
 
-        if(!(new RoundMatchDAO(getApplicationContext())).HasNextRoundMatch(currentRound.getRoundId())){
-            finishRound();
+        if(currentRound == null) {
+            return false;
+        }else{
+            return true;
         }
-
-        Intent intent = new Intent(getApplicationContext(), RoundMatchResultActivity.class);
-        intent.putExtra("RoundMatch", this.currentRoundMatch);
-        startActivityForResult(intent, RoundMatchResultActivity.IntentId);
-        finish(); //Fecha este activity (impede o go back)
-    }
-
-    //Ao terminar todas as partidas
-    private void finishRound(){
-        currentRound.setFinished(true);
-        (new RoundDAO(getApplicationContext())).Update(currentRound);
-    }
-
-    //Volta pra outra tela
-    private void goBack(){
-        setResult(RESULT_CANCELED);
-        finish();
     }
 
     //Cria uma rodada nova
@@ -203,17 +102,6 @@ public class RoundActivity extends AppCompatActivity {
                     ) {
                 (new RoundMatchDAO(getApplicationContext())).Insert(m);
             }
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RegisterGoalActivity.IntentId) { //Veio da tela de registro de gol
-            if (resultCode == RESULT_OK) {
-                updateUI();
-            }
-        }else if(resultCode == RoundMatchResultActivity.IntentId){ //Veio da tela de finalizacao
-            startNextRound(); //Inicia uma nova partida
         }
     }
 }
