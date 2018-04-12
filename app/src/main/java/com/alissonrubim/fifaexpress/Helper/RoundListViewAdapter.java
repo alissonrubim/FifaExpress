@@ -63,6 +63,7 @@ public class RoundListViewAdapter extends BaseAdapter {
             line.imageViewFriend2 = convertView.findViewById(R.id.imageViewFriend2);
             line.textViewFriend1Goals = convertView.findViewById(R.id.textViewFriend1Goals);
             line.textViewFriend2Goals = convertView.findViewById(R.id.textViewFriend2Goals);
+            line.textViewFinished = convertView.findViewById(R.id.textViewFinished);
         }else{
             line = (RoundListViewAdapter.RoundListViewLine) convertView.getTag();
         }
@@ -78,6 +79,11 @@ public class RoundListViewAdapter extends BaseAdapter {
         line.textViewFriend2Goals.setText(Integer.toString(roundMatchGoalDAO.GetTotalGoalsByFriend(rm.getFriend2(), rm)));
         line.imageViewFriend1.setImageResource(TeamLogoCatcher.GetLogo(rm.getFriend1().getTeam()));
         line.imageViewFriend2.setImageResource(TeamLogoCatcher.GetLogo(rm.getFriend2().getTeam()));
+        if(rm.isFinished()){
+            line.textViewFinished.setVisibility(View.VISIBLE);
+        }else{
+            line.textViewFinished.setVisibility(View.INVISIBLE);
+        }
         return convertView;
     }
 
@@ -91,5 +97,6 @@ public class RoundListViewAdapter extends BaseAdapter {
         public ImageView imageViewFriend2;
         public TextView textViewFriend1Goals;
         public TextView textViewFriend2Goals;
+        public TextView textViewFinished;
     }
 }

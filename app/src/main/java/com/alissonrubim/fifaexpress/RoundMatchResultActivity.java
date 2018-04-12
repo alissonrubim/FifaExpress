@@ -15,8 +15,7 @@ import com.alissonrubim.fifaexpress.Model.RoundMatch;
 public class RoundMatchResultActivity extends AppCompatActivity {
     public static int IntentId = 400;
 
-    //private Button buttonNextMatch;
-    //private Button buttonShowRoundResult;
+    private Button buttonGoBack;
     private TextView textViewGame;
     private TextView textViewScore;
 
@@ -35,20 +34,12 @@ public class RoundMatchResultActivity extends AppCompatActivity {
         if(currentRoundMatch == null){
             Toast.makeText(this, "Ops, RoundMatch não definido!", Toast.LENGTH_SHORT).show();
         }else {
-            /*buttonNextMatch.setOnClickListener(new View.OnClickListener() {
+            buttonGoBack.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     goBack();
                 }
             });
-
-            if (!(new RoundMatchDAO(getApplicationContext())).HasNextRoundMatch(currentRoundMatch.getRound().getRoundId())) {
-                buttonNextMatch.setVisibility(View.INVISIBLE);
-                buttonShowRoundResult.setVisibility(View.VISIBLE);
-            } else {
-                buttonNextMatch.setVisibility(View.VISIBLE);
-                buttonShowRoundResult.setVisibility(View.INVISIBLE);
-            }*/
         }
     }
 
@@ -79,8 +70,7 @@ public class RoundMatchResultActivity extends AppCompatActivity {
     }
 
     private void bind(){
-        //buttonNextMatch = findViewById(R.id.buttonNextMatch);
-        //buttonShowRoundResult = findViewById(R.id.buttonShowRoundResult);
+        buttonGoBack = findViewById(R.id.buttonGoBack);
         textViewGame = findViewById(R.id.textViewGame);
         textViewScore = findViewById(R.id.textViewScore);
     }

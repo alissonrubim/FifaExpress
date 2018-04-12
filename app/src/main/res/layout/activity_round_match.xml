@@ -7,18 +7,6 @@
     tools:context="com.alissonrubim.fifaexpress.RoundMatchActivity">
 
     <Button
-        android:id="@+id/buttonGoal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="Registrar Gol"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
         android:id="@+id/buttonFinish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,60 +22,117 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="368dp"
-        android:layout_height="371dp"
+        android:layout_height="424dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        app:layout_constraintBottom_toTopOf="@+id/buttonFinish"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textViewGame"
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="43dp"
             android:text="Rodada 0 de 0"
             android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textViewPlayer1Name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
+            android:gravity="center"
             android:text="-"
             android:textAlignment="center"
+            android:textColor="@android:color/black"
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/textViewPlayer1Goals"
+            android:id="@+id/textViewFriend1Team"
             android:layout_width="match_parent"
-            android:layout_height="92dp"
-            android:text="0"
-            android:textAlignment="center"
-            android:textSize="36sp" />
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:text="-"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/imageViewFriend1TeamLogo"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            app:srcCompat="@drawable/logo_none" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewPlayer1Goals"
+                android:layout_width="20dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="36sp" />
+
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="76dp"
+            android:layout_height="51dp"
+            android:gravity="center"
             android:lineSpacingExtra="30sp"
             android:text="X"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textViewPlayer2Goals"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:textAlignment="center"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="36sp" />
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewPlayer2Goals"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="top"
+                android:text="0"
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="36sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageViewFriend2TeamLogo"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            app:srcCompat="@drawable/logo_none" />
+
+        <TextView
+            android:id="@+id/textViewFriend2Team"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:text="-"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/textViewPlayer2Name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
+            android:gravity="center"
             android:text="-"
             android:textAlignment="center"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="@android:color/black"
             android:textSize="30sp" />
 
     </LinearLayout>

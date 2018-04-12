@@ -9,25 +9,24 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="373dp"
         android:layout_height="68dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginStart="3dp"
         android:layout_marginTop="4dp"
         android:backgroundTint="@android:color/holo_orange_light"
         android:backgroundTintMode="screen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="374dp"
-            android:layout_height="61dp"
+            android:layout_width="367dp"
+            android:layout_height="64dp"
             android:orientation="horizontal"
             tools:layout_editor_absoluteX="-1dp">
 
             <TextView
                 android:id="@+id/textViewRoundRoundNumber"
-                android:layout_width="wrap_content"
+                android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -40,15 +39,15 @@
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/constraintLayout"
-                android:layout_width="322dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 tools:layout_editor_absoluteX="20dp">
 
                 <LinearLayout
                     android:id="@+id/linearLayout"
-                    android:layout_width="332dp"
-                    android:layout_height="57dp"
+                    android:layout_width="347dp"
+                    android:layout_height="55dp"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -88,36 +87,62 @@
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textViewFriend1Goals"
-                        android:layout_width="25dp"
-                        android:layout_height="wrap_content"
+                    <LinearLayout
+                        android:layout_width="77dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="24sp" />
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView15"
-                        android:layout_width="32dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="vs"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/textViewFriend2Goals"
-                        android:layout_width="21dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="0"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/darker_gray"
-                        android:textSize="24sp" />
+                            <TextView
+                                android:id="@+id/textViewFriend1Goals"
+                                android:layout_width="25dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="0"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:id="@+id/textView15"
+                                android:layout_width="30dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="vs"
+                                android:textAlignment="center"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textViewFriend2Goals"
+                                android:layout_width="21dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="0"
+                                android:textAlignment="center"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/textViewFinished"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
+                            android:text="Finalizado"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/holo_blue_dark"
+                            android:textSize="10sp" />
+
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="139dp"
@@ -153,19 +178,9 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
             </android.support.constraint.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textViewRoundFinished"
-                android:layout_width="10dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textAlignment="textStart"
-                android:textColor="@android:color/black"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="2dp"
-                tools:layout_editor_absoluteY="2dp" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>

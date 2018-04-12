@@ -5,9 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alissonrubim.fifaexpress.Helper.TeamLogoCatcher;
 import com.alissonrubim.fifaexpress.Model.DAO.FriendDAO;
 import com.alissonrubim.fifaexpress.Model.DAO.RoundDAO;
 import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchDAO;
@@ -22,10 +24,13 @@ import java.util.Random;
 public class RoundMatchActivity extends AppCompatActivity {
 
     private Button buttonFinish;
-    private Button buttonGoal;
     private TextView textViewPlayer1Name;
     private TextView textViewPlayer1Goals;
+    private TextView textViewFriend1Team;
+    private ImageView imageViewFriend1TeamLogo;
+    private ImageView imageViewFriend2TeamLogo;
     private TextView textViewPlayer2Goals;
+    private TextView textViewFriend2Team;
     private TextView textViewGame;
     private TextView textViewPlayer2Name;
     public static int IntentId = 200;
@@ -56,12 +61,12 @@ public class RoundMatchActivity extends AppCompatActivity {
                 }
             });
 
-            buttonGoal.setOnClickListener(new View.OnClickListener() {
+           /* buttonGoal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     showRegisterGoalActivity();
                 }
-            });
+            });*/
         }
     }
 
@@ -81,8 +86,12 @@ public class RoundMatchActivity extends AppCompatActivity {
     private void updateUI(){
         textViewPlayer1Name.setText(currentRoundMatch.getFriend1().getName());
         textViewPlayer2Name.setText(currentRoundMatch.getFriend2().getName());
+        imageViewFriend1TeamLogo.setImageResource(TeamLogoCatcher.GetLogo(currentRoundMatch.getFriend1().getTeam()));
+        imageViewFriend2TeamLogo.setImageResource(TeamLogoCatcher.GetLogo(currentRoundMatch.getFriend2().getTeam()));
         textViewPlayer1Goals.setText(Integer.toString(getTotalGoalsByFriend(currentRoundMatch.getFriend1())));
         textViewPlayer2Goals.setText(Integer.toString(getTotalGoalsByFriend(currentRoundMatch.getFriend2())));
+        textViewFriend1Team.setText(currentRoundMatch.getFriend1().getTeam().getName());
+        textViewFriend2Team.setText(currentRoundMatch.getFriend2().getTeam().getName());
         textViewGame.setText("Rodada "+Integer.toString(currentRoundMatch.getNumber())+" de " + Integer.toString((new RoundMatchDAO(getApplicationContext()).GetCounByRoundId(currentRoundMatch.getRound().getRoundId()))));
     }
 
@@ -91,9 +100,12 @@ public class RoundMatchActivity extends AppCompatActivity {
         textViewPlayer1Name = findViewById(R.id.textViewPlayer1Name);
         textViewPlayer2Name = findViewById(R.id.textViewPlayer2Name);
         textViewGame = findViewById(R.id.textViewGame);
-        buttonGoal = findViewById(R.id.buttonGoal);
         textViewPlayer1Goals = findViewById(R.id.textViewPlayer1Goals);
         textViewPlayer2Goals = findViewById(R.id.textViewPlayer2Goals);
+        imageViewFriend1TeamLogo = findViewById(R.id.imageViewFriend1TeamLogo);
+        imageViewFriend2TeamLogo = findViewById(R.id.imageViewFriend2TeamLogo);
+        textViewFriend1Team = findViewById(R.id.textViewFriend1Team);
+        textViewFriend2Team = findViewById(R.id.textViewFriend2Team);
     }
 
 
