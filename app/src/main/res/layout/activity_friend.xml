@@ -41,8 +41,8 @@
             android:layout_marginBottom="80dp"
             android:layout_marginEnd="23dp"
             android:layout_marginRight="23dp"
-            fab:fab_colorNormal="@color/pink"
-            fab:fab_colorPressed="@color/pink_pressed"
+            app:fab_colorNormal="@android:color/holo_green_light"
+            app:fab_colorPressed="@android:color/holo_green_dark"
             fab:fab_icon="@drawable/ic_person_add_white_24dp" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -55,8 +55,8 @@
             android:layout_marginBottom="14dp"
             android:layout_marginEnd="23dp"
             android:layout_marginRight="23dp"
-            fab:fab_colorNormal="@color/pink"
-            fab:fab_colorPressed="@color/pink_pressed"
+            app:fab_colorNormal="@color/colorPrimary"
+            app:fab_colorPressed="@android:color/holo_orange_dark"
             fab:fab_icon="@drawable/ic_play_arrow_white_24dp" />
 
 

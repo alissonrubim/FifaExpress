@@ -7,20 +7,23 @@
     android:layout_height="match_parent">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="369dp"
-        android:layout_height="66dp"
+        android:layout_width="373dp"
+        android:layout_height="68dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:backgroundTintMode="screen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_width="374dp"
+            android:layout_height="61dp"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="-1dp">
 
             <TextView
                 android:id="@+id/textViewRoundRoundNumber"
@@ -153,12 +156,11 @@
             </android.support.constraint.ConstraintLayout>
 
             <TextView
-                android:id="@+id/textViewRoundRoundNumber2"
-                android:layout_width="wrap_content"
+                android:id="@+id/textViewRoundFinished"
+                android:layout_width="10dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="X"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"

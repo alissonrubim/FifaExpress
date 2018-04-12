@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class RoundActivity extends AppCompatActivity {
     public static final int IntentId = 700;
 
     private Round currentRound;
+    private Button buttonFinishRound;
     private ListView listViewResume;
     private ArrayList<RoundMatch> listRounds;
 
@@ -44,12 +46,19 @@ public class RoundActivity extends AppCompatActivity {
               }
         });
 
+        buttonFinishRound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finishRound();
+            }
+        });
 
         fillListViewResume();
     }
 
     private void bind(){
         listViewResume = findViewById(R.id.listViewResume);
+        buttonFinishRound = findViewById(R.id.buttonFinishRound);
     }
 
     private void showRoundMatch(RoundMatch roundMatch){
@@ -133,6 +142,9 @@ public class RoundActivity extends AppCompatActivity {
     private void finishRound(){
         currentRound.setFinished(true);
         (new RoundDAO(getApplicationContext())).Update(currentRound);
+        Intent intent = new Intent(getApplicationContext(), RoundResultActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

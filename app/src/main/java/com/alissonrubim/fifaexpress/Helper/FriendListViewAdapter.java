@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alissonrubim.fifaexpress.Model.Friend;
@@ -53,6 +54,7 @@ public class FriendListViewAdapter extends BaseAdapter{
             line = new FriendListViewLine();
             line.textViewFriendName = convertView.findViewById(R.id.textViewFriendName);
             line.textViewTeamName = convertView.findViewById(R.id.textViewTeamName);
+            line.imageViewTeamLogo = convertView.findViewById(R.id.imageViewTeamLogo);
         }else{
             line = (FriendListViewLine) convertView.getTag();
         }
@@ -60,6 +62,7 @@ public class FriendListViewAdapter extends BaseAdapter{
         Friend f = (Friend) getItem(position);
         line.textViewFriendName.setText(f.getName());
         line.textViewTeamName.setText(f.getTeam().getName());
+        line.imageViewTeamLogo.setImageResource(TeamLogoCatcher.GetLogo(f.getTeam()));
 
         return convertView;
     }
@@ -67,5 +70,6 @@ public class FriendListViewAdapter extends BaseAdapter{
     class FriendListViewLine {
         public TextView textViewFriendName;
         public TextView textViewTeamName;
+        public ImageView imageViewTeamLogo;
     }
 }
