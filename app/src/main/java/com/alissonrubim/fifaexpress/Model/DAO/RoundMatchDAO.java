@@ -28,7 +28,19 @@ public class RoundMatchDAO implements BaseDAO<RoundMatch> {
     }
 
     public ArrayList<RoundMatch> GetAllByRoundId(long roundId) {
-        throw  new UnsupportedOperationException();
+        ArrayList<RoundMatch> rounds = new ArrayList<>();
+        Cursor c = database.getReadableDatabase().rawQuery("SELECT RoundMatchId, RoundId, Friend1Id, Friend2Id, Finished, Number FROM RoundMatch WHERE RoundId = " + roundId + " ORDER BY Number", null);
+        if (c.moveToFirst()){
+            do {
+            Round r = (new RoundDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("RoundId")));
+            Friend f1 = (new FriendDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("Friend1Id")));
+            Friend f2 = (new FriendDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("Friend2Id")));
+            rounds.add(new RoundMatch(c.getInt(c.getColumnIndex("RoundMatchId")), r, f1, f2, c.getInt(c.getColumnIndex("Number")), c.getInt(c.getColumnIndex("Finished")) == 1));
+            } while(c.moveToNext());
+        }
+        c.close();
+        database.close();
+        return rounds;
     }
 
     public RoundMatch GetNextByRoundId(long roundId){

@@ -1,7 +1,10 @@
 package com.alissonrubim.fifaexpress;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -21,15 +24,26 @@ public class RoundActivity extends AppCompatActivity {
 
     private Round currentRound;
     private ListView listViewResume;
+    private ArrayList<RoundMatch> listRounds;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_round);
 
+        bind();
+
         if(!loadRound()){
             createRound();
         }
+
+        listViewResume.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+              @Override
+              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                  showRoundMatch(listRounds.get(position));
+              }
+        });
+
 
         fillListViewResume();
     }
@@ -38,10 +52,20 @@ public class RoundActivity extends AppCompatActivity {
         listViewResume = findViewById(R.id.listViewResume);
     }
 
+    private void showRoundMatch(RoundMatch roundMatch){
+        if(roundMatch.isFinished()){
+            Toast.makeText(this, "Esta rodada já foi finalizada!", Toast.LENGTH_SHORT).show();
+        }else {
+            Intent intent = new Intent(getApplicationContext(), RoundMatchActivity.class);
+            intent.putExtra("RoundMatch", roundMatch);
+            startActivityForResult(intent, RoundMatchActivity.IntentId);
+        }
+    }
+
     //Preenche a lista resumo com os rounds
     private void fillListViewResume(){
-        ArrayList<RoundMatch> rounds = (new RoundMatchDAO(getApplicationContext())).GetAllByRoundId(currentRound.getRoundId());
-        RoundListViewAdapter adapter = new RoundListViewAdapter(getApplicationContext(), rounds);
+        listRounds = (new RoundMatchDAO(getApplicationContext())).GetAllByRoundId(currentRound.getRoundId());
+        RoundListViewAdapter adapter = new RoundListViewAdapter(getApplicationContext(), listRounds);
         listViewResume.setAdapter(adapter);
     }
 
@@ -103,5 +127,16 @@ public class RoundActivity extends AppCompatActivity {
                 (new RoundMatchDAO(getApplicationContext())).Insert(m);
             }
         }
+    }
+
+    //finaliza a rodada e vai para a tela de RoundResult
+    private void finishRound(){
+        currentRound.setFinished(true);
+        (new RoundDAO(getApplicationContext())).Update(currentRound);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        fillListViewResume();
     }
 }

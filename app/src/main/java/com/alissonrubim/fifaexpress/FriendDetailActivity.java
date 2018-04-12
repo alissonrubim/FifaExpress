@@ -79,7 +79,6 @@ public class FriendDetailActivity extends AppCompatActivity {
         finish();
     }
 
-
     private void bindUI(){
         buttonConfirm = findViewById(R.id.buttonConfirm);
         spinnerTeam = findViewById(R.id.spinnerTeam);
