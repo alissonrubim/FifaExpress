@@ -14,7 +14,7 @@ public class TeamLogoCatcher {
         if(name.equals("Flamengo"))
             return R.drawable.logo_flamengo;
         else if(name.equals("Santos"))
-            return R.drawable.logo_santos;
+            return R.drawable.logo_none;
         else if(name.equals("Barcelona"))
             return R.drawable.logo_barcelona;
         else if(name.equals("Vasco"))

@@ -1,5 +1,7 @@
 package com.alissonrubim.fifaexpress;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alissonrubim.fifaexpress.Helper.GoalDialog;
 import com.alissonrubim.fifaexpress.Helper.TeamLogoCatcher;
 import com.alissonrubim.fifaexpress.Model.DAO.FriendDAO;
 import com.alissonrubim.fifaexpress.Model.DAO.RoundDAO;
@@ -33,6 +36,12 @@ public class RoundMatchActivity extends AppCompatActivity {
     private TextView textViewFriend2Team;
     private TextView textViewGame;
     private TextView textViewPlayer2Name;
+    private ImageView imageViewFriend1RemoveGoal;
+    private ImageView imageViewFriend2RemoveGoal;
+    private ImageView imageViewFriend1AddGoal;
+    private ImageView imageViewFriend2AddGoal;
+
+
     public static int IntentId = 200;
 
     private RoundMatch currentRoundMatch;
@@ -61,6 +70,20 @@ public class RoundMatchActivity extends AppCompatActivity {
                 }
             });
 
+            imageViewFriend1AddGoal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addGoal(currentRoundMatch.getFriend1());
+                }
+            });
+
+            imageViewFriend2AddGoal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addGoal(currentRoundMatch.getFriend2());
+                }
+            });
+
            /* buttonGoal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -71,10 +94,23 @@ public class RoundMatchActivity extends AppCompatActivity {
     }
 
     //Abre a activity de RegisterGoal
-    private void showRegisterGoalActivity(){
+    /*private void showRegisterGoalActivity(){
         Intent intent = new Intent(getApplicationContext(), RegisterGoalActivity.class);
         intent.putExtra("RoundMatch", this.currentRoundMatch);
         startActivityForResult(intent, RegisterGoalActivity.IntentId);
+    }*/
+
+    private void addGoal(Friend friend){
+        GoalDialog dialog = new GoalDialog(this);
+        dialog.SetTitle("Registrar gol");
+        dialog.LoadPlayersSpinner(friend);
+        dialog.Show();
+    }
+
+    private void removeGoal(Friend friend){
+        GoalDialog dialog = new GoalDialog(this);
+        dialog.SetTitle("Remover gol");
+        dialog.Show();
     }
 
     private int getTotalGoalsByFriend(Friend friend){
@@ -106,6 +142,10 @@ public class RoundMatchActivity extends AppCompatActivity {
         imageViewFriend2TeamLogo = findViewById(R.id.imageViewFriend2TeamLogo);
         textViewFriend1Team = findViewById(R.id.textViewFriend1Team);
         textViewFriend2Team = findViewById(R.id.textViewFriend2Team);
+        imageViewFriend1RemoveGoal = findViewById(R.id.imageViewFriend1RemoveGoal);
+        imageViewFriend2RemoveGoal = findViewById(R.id.imageViewFriend2RemoveGoal);
+        imageViewFriend1AddGoal = findViewById(R.id.imageViewFriend1AddGoal);
+        imageViewFriend2AddGoal = findViewById(R.id.imageViewFriend2AddGoal);
     }
 
 

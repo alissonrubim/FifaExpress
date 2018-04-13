@@ -34,20 +34,60 @@
         <TextView
             android:id="@+id/textViewGame"
             android:layout_width="match_parent"
-            android:layout_height="86dp"
+            android:layout_height="33dp"
             android:text="Rodada 0 de 0"
             android:textAlignment="center"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
 
         <TextView
-            android:id="@+id/textViewScore"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:text="0 x 0"
+            android:layout_height="68dp"
+            android:text="Resultado"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="118dp"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/imageViewWinnerLogo"
+                android:layout_width="91dp"
+                android:layout_height="108dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/logo_none" />
+
+            <TextView
+                android:id="@+id/textViewScore"
+                android:layout_width="106dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="0 x 0"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageViewLoserLogo"
+                android:layout_width="91dp"
+                android:layout_height="107dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/logo_none" />
+
+            <Space
+                android:layout_width="30dp"
+                android:layout_height="50dp"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -60,7 +100,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/textViewWinnerTitle"
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:text="Vencedor"
@@ -69,24 +109,25 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/textViewWinnerFriend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Alisson"
+                    android:text="-"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_orange_dark"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/textViewWinnerTeam"
                     android:layout_width="match_parent"
                     android:layout_height="26dp"
-                    android:text="Tupi"
+                    android:text="-"
                     android:textAlignment="center"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/textViewWinnerPoints"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:text="+5 pontos"
@@ -101,7 +142,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/textViewLoserTitle"
                     android:layout_width="match_parent"
                     android:layout_height="34dp"
                     android:text="Perdedor"
@@ -110,25 +151,25 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/textViewLoserFriend"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Alisson"
+                    android:text="-"
                     android:textAlignment="center"
                     android:textColor="@android:color/holo_orange_dark"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/textViewLoserTeam"
                     android:layout_width="match_parent"
                     android:layout_height="26dp"
-                    android:text="Tupi"
+                    android:text="-"
                     android:textAlignment="center"
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/textViewLoserPoints"
                     android:layout_width="match_parent"
                     android:layout_height="36dp"
                     android:text="+5 pontos"

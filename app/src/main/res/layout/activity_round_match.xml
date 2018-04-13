@@ -38,7 +38,7 @@
         <TextView
             android:id="@+id/textViewGame"
             android:layout_width="match_parent"
-            android:layout_height="43dp"
+            android:layout_height="32dp"
             android:text="Rodada 0 de 0"
             android:textAlignment="center" />
 
@@ -71,15 +71,29 @@
             android:layout_height="50dp"
             android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/imageViewFriend1RemoveGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_minus" />
+
             <TextView
                 android:id="@+id/textViewPlayer1Goals"
-                android:layout_width="20dp"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_weight="1"
                 android:text="0"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/imageViewFriend1AddGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_plus" />
 
         </LinearLayout>
 
@@ -99,6 +113,13 @@
             android:layout_height="50dp"
             android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/imageViewFriend2RemoveGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_minus" />
+
             <TextView
                 android:id="@+id/textViewPlayer2Goals"
                 android:layout_width="match_parent"
@@ -109,6 +130,13 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
                 android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/imageViewFriend2AddGoal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_plus" />
         </LinearLayout>
 
         <ImageView
