@@ -41,4 +41,8 @@ public class RoundMatchGoalDAO {
         insertValues.put("RoundMatchId", roundMatch.getRoundMatchId());
         database.getWritableDatabase().insert("RoundMatchGoal", null, insertValues);
     }
+
+    public void Delete(Player player, RoundMatch roundMatch){
+        database.getWritableDatabase().execSQL("DELETE FROM RoundMatchGoal WHERE PlayerId = " + player.getPlayerId() + " AND RoundMatchId = " + roundMatch.getRoundMatchId());
+    }
 }

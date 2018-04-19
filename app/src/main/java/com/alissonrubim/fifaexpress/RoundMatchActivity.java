@@ -18,6 +18,7 @@ import com.alissonrubim.fifaexpress.Model.DAO.RoundDAO;
 import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchDAO;
 import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchGoalDAO;
 import com.alissonrubim.fifaexpress.Model.Friend;
+import com.alissonrubim.fifaexpress.Model.Player;
 import com.alissonrubim.fifaexpress.Model.Round;
 import com.alissonrubim.fifaexpress.Model.RoundMatch;
 
@@ -84,33 +85,48 @@ public class RoundMatchActivity extends AppCompatActivity {
                 }
             });
 
-           /* buttonGoal.setOnClickListener(new View.OnClickListener() {
+            imageViewFriend1RemoveGoal.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showRegisterGoalActivity();
+                    removeGoal(currentRoundMatch.getFriend1());
                 }
-            });*/
+            });
+
+            imageViewFriend2RemoveGoal.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    removeGoal(currentRoundMatch.getFriend2());
+                }
+            });
         }
     }
 
-    //Abre a activity de RegisterGoal
-    /*private void showRegisterGoalActivity(){
-        Intent intent = new Intent(getApplicationContext(), RegisterGoalActivity.class);
-        intent.putExtra("RoundMatch", this.currentRoundMatch);
-        startActivityForResult(intent, RegisterGoalActivity.IntentId);
-    }*/
-
     private void addGoal(Friend friend){
-        GoalDialog dialog = new GoalDialog(this);
-        dialog.SetTitle("Registrar gol");
-        dialog.LoadPlayersSpinner(friend);
+        GoalDialog dialog = new GoalDialog(this, "Registrar GOL", friend) {
+            @Override
+            public void OnConfirm(Player player){
+                (new RoundMatchGoalDAO(getApplicationContext())).Insert(player, currentRoundMatch);
+                super.OnConfirm(player);
+                updateUI();
+            }
+        };
         dialog.Show();
     }
 
     private void removeGoal(Friend friend){
-        GoalDialog dialog = new GoalDialog(this);
-        dialog.SetTitle("Remover gol");
-        dialog.Show();
+        if(getTotalGoalsByFriend(friend) > 0) {
+            GoalDialog dialog = new GoalDialog(this, "Remover GOL", friend) {
+                @Override
+                public void OnConfirm(Player player) {
+                    (new RoundMatchGoalDAO(getApplicationContext())).Delete(player, currentRoundMatch);
+                    super.OnConfirm(player);
+                    updateUI();
+                }
+            };
+            dialog.Show();
+        }else{
+            Toast.makeText(getApplicationContext(), "Ainda não foram registrados gols para esse time", Toast.LENGTH_LONG);
+        }
     }
 
     private int getTotalGoalsByFriend(Friend friend){
@@ -158,15 +174,5 @@ public class RoundMatchActivity extends AppCompatActivity {
         intent.putExtra("RoundMatch", this.currentRoundMatch);
         startActivityForResult(intent, RoundMatchResultActivity.IntentId);
         finish(); //Fecha este activity (impede o go back)
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == RegisterGoalActivity.IntentId) { //Veio da tela de registro de gol
-            if (resultCode == RESULT_OK) {
-                updateUI();
-            }
-        }
     }
 }
