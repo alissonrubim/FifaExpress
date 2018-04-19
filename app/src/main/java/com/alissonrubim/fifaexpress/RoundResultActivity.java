@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchDAO;
 import com.alissonrubim.fifaexpress.Model.Friend;
@@ -19,10 +20,16 @@ public class RoundResultActivity extends AppCompatActivity {
 
     private Round currentRound;
 
+    private TextView textViewFriendName;
+    private TextView textViewWinnerPoints;
+    private TextView textViewWinnerGoals;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_round_result);
+
+        currentRound = (Round) getIntent().getExtras().getSerializable("Round");
 
         bind();
 
@@ -45,10 +52,16 @@ public class RoundResultActivity extends AppCompatActivity {
     private void updateUI() {
         Round.RoundResult result =  currentRound.GetResult(getApplicationContext());
 
+        textViewFriendName.setText(result.Winner.getName());
+        textViewWinnerPoints.setText(textViewWinnerPoints.getText().toString().replace("$points", Integer.toString(result.WinnerPoints)));
+        textViewWinnerGoals.setText(textViewWinnerGoals.getText().toString().replace("$goals", Integer.toString(result.WinnerGoals)));
     }
 
 
     private void bind(){
         buttonGoBack = findViewById(R.id.buttonGoBack);
+        textViewFriendName = findViewById(R.id.textViewFriendName);
+        textViewWinnerPoints = findViewById(R.id.textViewWinnerPoints);
+        textViewWinnerGoals = findViewById(R.id.textViewWinnerGoals);
     }
 }

@@ -143,6 +143,7 @@ public class RoundActivity extends AppCompatActivity {
         currentRound.setFinished(true);
         (new RoundDAO(getApplicationContext())).Update(currentRound);
         Intent intent = new Intent(getApplicationContext(), RoundResultActivity.class);
+        intent.putExtra("Round", currentRound);
         startActivity(intent);
         finish();
     }

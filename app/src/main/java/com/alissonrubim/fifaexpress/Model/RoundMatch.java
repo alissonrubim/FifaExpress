@@ -97,11 +97,11 @@ public class RoundMatch implements BaseModel {
         int pointsLoser = 0;
 
         if (goalsWinner != goalsLoser) {
-            pointsWinner = 5;
+            pointsWinner = 3;
         }
 
-        pointsWinner += (3 * goalsWinner) - (0.5 * goalsLoser);
-        pointsLoser += (3 * goalsLoser) - (0.5 * goalsWinner);
+        pointsWinner += (1 * goalsWinner) - (0.5 * goalsLoser);
+        pointsLoser += (1 * goalsLoser) - (0.5 * goalsWinner);
 
 
         return new RoundMatchResult(friendWinner, friendLoser, goalsWinner == goalsLoser, pointsWinner, pointsLoser, goalsWinner, goalsLoser);

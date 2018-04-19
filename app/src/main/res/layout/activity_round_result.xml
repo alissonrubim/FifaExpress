@@ -27,7 +27,7 @@
             android:id="@+id/textViewFriendName"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="Alisson"
+            android:text="$friendName"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -40,18 +40,18 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textViewWinnerPoints"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="45 pontos"
+            android:text="$points pontos"
             android:textAlignment="center"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/textViewWinnerGoals"
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:text="12 gols"
+            android:text="$goals gols"
             android:textAlignment="center"
             android:textSize="18sp" />
 
