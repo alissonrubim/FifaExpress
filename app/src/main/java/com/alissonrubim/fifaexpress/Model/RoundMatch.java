@@ -72,5 +72,4 @@ public class RoundMatch implements BaseModel {
     public void setNumber(int number) {
         Number = number;
     }
-
 }

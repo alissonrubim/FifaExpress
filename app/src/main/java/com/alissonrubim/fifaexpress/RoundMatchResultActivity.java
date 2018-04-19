@@ -60,43 +60,52 @@ public class RoundMatchResultActivity extends AppCompatActivity {
         }
     }
 
-    private void updateUI(){
+    private void updateUI() {
         RoundMatchGoalDAO roundMatchGoalDAO = new RoundMatchGoalDAO(getApplicationContext());
 
-        int goalsFriend01 = roundMatchGoalDAO.GetTotalGoalsByFriend(currentRoundMatch.getFriend1(), currentRoundMatch);
-        int goalsFriend02 = roundMatchGoalDAO.GetTotalGoalsByFriend(currentRoundMatch.getFriend2(), currentRoundMatch);
+        Friend friendWinner = currentRoundMatch.getFriend1();
+        Friend friendLoser = currentRoundMatch.getFriend2();
 
-        Friend friendWinner = null;
-        Friend friendLoser = null;
-        boolean even = false;
+        int goalsWinner = roundMatchGoalDAO.GetTotalGoalsByFriend(friendWinner, currentRoundMatch);
+        int goalsLoser = roundMatchGoalDAO.GetTotalGoalsByFriend(friendLoser, currentRoundMatch);
 
-        if(goalsFriend01 < goalsFriend02){
-            friendWinner = currentRoundMatch.getFriend2();
-            friendLoser = currentRoundMatch.getFriend1();
-        }else if (goalsFriend01 > goalsFriend02){
-            friendWinner = currentRoundMatch.getFriend1();
-            friendLoser = currentRoundMatch.getFriend2();
-        }else{
-            friendWinner = currentRoundMatch.getFriend1();
-            friendLoser = currentRoundMatch.getFriend2();
-            even = true;
+        if (goalsWinner < goalsLoser) { //se for ao contrario, inverte tudo
+            Friend aux = friendWinner;
+            friendWinner = friendLoser;
+            friendLoser = aux;
+
+            int auxG = goalsWinner;
+            goalsWinner = goalsLoser;
+            goalsLoser = auxG;
         }
 
-        textViewGame.setText("Rodada "+Integer.toString(currentRoundMatch.getNumber())+" de " + Integer.toString(new RoundMatchDAO(getApplicationContext()).GetCounByRoundId(currentRoundMatch.getRound().getRoundId())));
-        textViewScore.setText(Integer.toString(goalsFriend01) + " x " + Integer.toString(goalsFriend02));
-        if(!even) {
-            textViewWinnerTitle.setText("Vencedor");
-            textViewLoserTitle.setText("Perdedor");
-        }else{
-            textViewWinnerTitle.setText("Jogador");
+        textViewGame.setText("Rodada " + Integer.toString(currentRoundMatch.getNumber()) + " de " + Integer.toString(new RoundMatchDAO(getApplicationContext()).GetCounByRoundId(currentRoundMatch.getRound().getRoundId())));
+        textViewScore.setText(Integer.toString(goalsWinner) + " x " + Integer.toString(goalsLoser));
+
+        if (goalsWinner == goalsLoser) { //se estiver empatado
+            textViewWinnerTitle.setText("Jogador"); //troca o text para Jogador
             textViewLoserTitle.setText("Jogador");
         }
+
         textViewWinnerFriend.setText(friendWinner.getName());
         textViewLoserFriend.setText(friendLoser.getName());
+
         textViewWinnerTeam.setText(friendWinner.getTeam().getName());
         textViewLoserTeam.setText(friendLoser.getTeam().getName());
-        textViewWinnerPoints.setText("+0 pontos");
-        textViewLoserPoints.setText("+0 pontos");
+
+        int pointsWinner = 0;
+        int pointsLoser = 0;
+
+        if (goalsWinner != goalsLoser) {
+            pointsWinner = 5;
+        }
+
+        pointsWinner += (3 * goalsWinner) - (0.5 * goalsLoser);
+        pointsLoser += (3 * goalsLoser) - (0.5 * goalsWinner);
+
+        textViewWinnerPoints.setText((pointsWinner > -1 ? "+" : "") + pointsWinner + " pontos");
+        textViewLoserPoints.setText((pointsLoser > -1 ? "+" : "") + pointsLoser + " pontos");
+
         imageViewWinnerLogo.setImageResource(TeamLogoCatcher.GetLogo(friendWinner.getTeam()));
         imageViewLoserLogo.setImageResource(TeamLogoCatcher.GetLogo(friendLoser.getTeam()));
     }
