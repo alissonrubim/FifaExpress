@@ -1,5 +1,7 @@
 package com.alissonrubim.fifaexpress.Model;
 
+import android.content.Context;
+
 import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchGoalDAO;
 
 import java.io.Serializable;
@@ -71,5 +73,58 @@ public class RoundMatch implements BaseModel {
 
     public void setNumber(int number) {
         Number = number;
+    }
+
+
+    public RoundMatchResult GetResult(Context context){
+        Friend friendWinner = this.getFriend1();
+        Friend friendLoser = this.getFriend2();
+
+        int goalsWinner = (new RoundMatchGoalDAO(context)).GetTotalGoalsByFriend(friendWinner, this);
+        int goalsLoser = (new RoundMatchGoalDAO(context)).GetTotalGoalsByFriend(friendLoser, this);
+
+        if (goalsWinner < goalsLoser) { //se for ao contrario, inverte tudo
+            Friend aux = friendWinner;
+            friendWinner = friendLoser;
+            friendLoser = aux;
+
+            int auxG = goalsWinner;
+            goalsWinner = goalsLoser;
+            goalsLoser = auxG;
+        }
+
+        int pointsWinner = 0;
+        int pointsLoser = 0;
+
+        if (goalsWinner != goalsLoser) {
+            pointsWinner = 5;
+        }
+
+        pointsWinner += (3 * goalsWinner) - (0.5 * goalsLoser);
+        pointsLoser += (3 * goalsLoser) - (0.5 * goalsWinner);
+
+
+        return new RoundMatchResult(friendWinner, friendLoser, goalsWinner == goalsLoser, pointsWinner, pointsLoser, goalsWinner, goalsLoser);
+    }
+
+
+    public class RoundMatchResult {
+        public RoundMatchResult(Friend winner, Friend loser, boolean even, int winnerPoints, int loserPoints, int winnerGoals, int loserGoals) {
+            Winner = winner;
+            Loser = loser;
+            Even = even;
+            WinnerPoints = winnerPoints;
+            LoserPoints = loserPoints;
+            WinnerGoals = winnerGoals;
+            LoserGoals = loserGoals;
+        }
+
+        public Friend Winner;
+        public Friend Loser;
+        public boolean Even;
+        public int WinnerPoints;
+        public int LoserPoints;
+        public int WinnerGoals;
+        public int LoserGoals;
     }
 }
