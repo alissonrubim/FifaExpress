@@ -26,7 +26,8 @@
         <TextView
             android:id="@+id/textViewFriendName"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="65dp"
+            android:gravity="center"
             android:text="$friendName"
             android:textAlignment="center"
             android:textSize="24sp"
@@ -79,12 +80,15 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/holo_blue_light"
         android:text="Ver Ranking"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/buttonGoBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.918" />
 
     <Button
         android:id="@+id/buttonGoBack"

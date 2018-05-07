@@ -35,6 +35,7 @@ public class RoundMatchGoalDAO {
         return goals;
     }
 
+
     public void Insert(Player player, RoundMatch roundMatch){
         ContentValues insertValues = new ContentValues();
         insertValues.put("PlayerId", player.getPlayerId());

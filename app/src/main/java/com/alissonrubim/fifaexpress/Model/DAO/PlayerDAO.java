@@ -5,6 +5,8 @@ import android.database.Cursor;
 
 import com.alissonrubim.fifaexpress.Model.Connection.Database;
 import com.alissonrubim.fifaexpress.Model.Player;
+import com.alissonrubim.fifaexpress.Model.Round;
+import com.alissonrubim.fifaexpress.Model.RoundMatch;
 import com.alissonrubim.fifaexpress.Model.Team;
 
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public class PlayerDAO implements BaseDAO<Player> {
         database.close();
         return players;
     }
-
+    
     @Override
     public Player GetById(int id) {
         return null;

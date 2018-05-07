@@ -24,7 +24,8 @@
         <activity android:name=".RoundResultActivity" />
         <activity android:name=".RoundMatchResultActivity" />
         <activity android:name=".RegisterGoalActivity" />
-        <activity android:name=".RoundActivity"></activity>
+        <activity android:name=".RoundActivity" />
+        <activity android:name=".RankActivity"></activity>
     </application>
 
 </manifest>

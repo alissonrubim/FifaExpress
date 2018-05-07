@@ -23,6 +23,7 @@ public class RoundResultActivity extends AppCompatActivity {
     private TextView textViewFriendName;
     private TextView textViewWinnerPoints;
     private TextView textViewWinnerGoals;
+    private Button buttonRanking;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,13 @@ public class RoundResultActivity extends AppCompatActivity {
                 goBack();
             }
         });
+
+        buttonRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showRankActivity();
+            }
+        });
     }
 
     private void goBack(){
@@ -49,12 +57,20 @@ public class RoundResultActivity extends AppCompatActivity {
         finish();
     }
 
+    private void showRankActivity(){
+        Intent intent = new Intent(getApplicationContext(), RankActivity.class);
+        intent.putExtra("Round", currentRound);
+        startActivity(intent);
+    }
+
     private void updateUI() {
         Round.RoundResult result =  currentRound.GetResult(getApplicationContext());
 
-        textViewFriendName.setText(result.Winner.getName());
-        textViewWinnerPoints.setText(textViewWinnerPoints.getText().toString().replace("$points", Integer.toString(result.WinnerPoints)));
-        textViewWinnerGoals.setText(textViewWinnerGoals.getText().toString().replace("$goals", Integer.toString(result.WinnerGoals)));
+        Round.RoundResultPosition winner = result.Positions.get(0);
+
+        textViewFriendName.setText(winner.Friend.getName());
+        textViewWinnerPoints.setText(textViewWinnerPoints.getText().toString().replace("$points", Integer.toString(winner.Points)));
+        textViewWinnerGoals.setText(textViewWinnerGoals.getText().toString().replace("$goals", Integer.toString(winner.Goals)));
     }
 
 
@@ -63,5 +79,6 @@ public class RoundResultActivity extends AppCompatActivity {
         textViewFriendName = findViewById(R.id.textViewFriendName);
         textViewWinnerPoints = findViewById(R.id.textViewWinnerPoints);
         textViewWinnerGoals = findViewById(R.id.textViewWinnerGoals);
+        buttonRanking = findViewById(R.id.buttonRanking);
     }
 }
