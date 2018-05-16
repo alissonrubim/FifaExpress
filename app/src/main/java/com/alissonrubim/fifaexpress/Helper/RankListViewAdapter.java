@@ -60,7 +60,7 @@ public class RankListViewAdapter extends BaseAdapter{
         Round.RoundResultPosition f = (Round.RoundResultPosition) getItem(position);
         line.textViewFriendName.setText(f.Friend.getName() + " - " + f.Friend.getTeam().getName());
         line.textViewPosition.setText(Integer.toString(position + 1) + "º");
-        line.textViewPointsGoals.setText(Integer.toString(f.Goals) + " Gols - " + Integer.toString(f.Points) + " Pontos");
+        line.textViewPointsGoals.setText(Integer.toString(f.Goals) + " Gols - " + Double.toString(f.Points) + " Pontos");
 
         return convertView;
     }

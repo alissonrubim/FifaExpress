@@ -12,6 +12,8 @@ import com.alissonrubim.fifaexpress.Model.Friend;
 import com.alissonrubim.fifaexpress.Model.Round;
 import com.alissonrubim.fifaexpress.Model.RoundMatch;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class RoundResultActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class RoundResultActivity extends AppCompatActivity {
     private TextView textViewFriendName;
     private TextView textViewWinnerPoints;
     private TextView textViewWinnerGoals;
+    private TextView textViewTopScorer;
     private Button buttonRanking;
 
     @Override
@@ -69,8 +72,9 @@ public class RoundResultActivity extends AppCompatActivity {
         Round.RoundResultPosition winner = result.Positions.get(0);
 
         textViewFriendName.setText(winner.Friend.getName());
-        textViewWinnerPoints.setText(textViewWinnerPoints.getText().toString().replace("$points", Integer.toString(winner.Points)));
+        textViewWinnerPoints.setText(textViewWinnerPoints.getText().toString().replace("$points", Double.toString(winner.Points)));
         textViewWinnerGoals.setText(textViewWinnerGoals.getText().toString().replace("$goals", Integer.toString(winner.Goals)));
+        textViewTopScorer.setText(result.TopScorer.Player.getName()  + " foi o artilheiro com " + result.TopScorer.Goals + " gols!");
     }
 
 
@@ -80,5 +84,6 @@ public class RoundResultActivity extends AppCompatActivity {
         textViewWinnerPoints = findViewById(R.id.textViewWinnerPoints);
         textViewWinnerGoals = findViewById(R.id.textViewWinnerGoals);
         buttonRanking = findViewById(R.id.buttonRanking);
+        textViewTopScorer = findViewById(R.id.textViewTopScorer);
     }
 }

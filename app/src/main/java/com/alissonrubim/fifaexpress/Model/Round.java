@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 
 import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchDAO;
+import com.alissonrubim.fifaexpress.Model.DAO.RoundMatchGoalDAO;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,7 +44,7 @@ public class Round implements BaseModel{
 
         RoundResult result = new RoundResult();
 
-        result.TopScorer = new TopScorer();
+        result.TopScorer = (new RoundMatchGoalDAO(context)).GetBestScorePlayer(this);
 
         for (RoundMatch rm:
                 roundMatches) {
@@ -51,17 +52,12 @@ public class Round implements BaseModel{
 
             result.Positions.add(new RoundResultPosition(rmResult.Winner, rmResult.WinnerPoints, rmResult.WinnerGoals));
             result.Positions.add(new RoundResultPosition(rmResult.Loser, rmResult.LoserPoints, rmResult.LoserGoals));
-
-            if(rmResult.WinnerGoals > result.TopScorer.Goals){
-
-                //result.TopScorer.Player =
-            }
         }
 
         Comparator<RoundResultPosition> comparator = new Comparator<RoundResultPosition>() {
             @Override
             public int compare(RoundResultPosition o1, RoundResultPosition o2) {
-                return o2.Points - o1.Points;
+                return (int)(o2.Points - o1.Points);
             }
         };
         Collections.sort(result.Positions, comparator);
@@ -74,20 +70,20 @@ public class Round implements BaseModel{
         public ArrayList<RoundResultPosition> Positions = new ArrayList<RoundResultPosition>();
     }
 
-    public class TopScorer {
+    public static class TopScorer {
         public int Goals = 0;
         public Player Player;
     }
 
     public class RoundResultPosition{
-        public RoundResultPosition(com.alissonrubim.fifaexpress.Model.Friend friend, int points, int goals) {
+        public RoundResultPosition(com.alissonrubim.fifaexpress.Model.Friend friend, double points, int goals) {
             Friend = friend;
             Points = points;
             Goals = goals;
         }
 
         public Friend Friend;
-        public int Points;
+        public double Points;
         public int Goals;
     }
 }

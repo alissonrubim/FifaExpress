@@ -78,8 +78,8 @@ public class RoundMatchResultActivity extends AppCompatActivity {
         textViewWinnerTeam.setText(result.Winner.getTeam().getName());
         textViewLoserTeam.setText(result.Loser.getTeam().getName());
 
-        textViewWinnerPoints.setText((result.WinnerPoints > -1 ? "+" : "") + result.WinnerPoints + " pontos");
-        textViewLoserPoints.setText((result.LoserPoints > -1 ? "+" : "") + result.LoserPoints + " pontos");
+        textViewWinnerPoints.setText((result.WinnerPoints > 0 ? "+" : "") + result.WinnerPoints + " pontos");
+        textViewLoserPoints.setText((result.LoserPoints > 0 ? "+" : "") + result.LoserPoints + " pontos");
 
         imageViewWinnerLogo.setImageResource(TeamLogoCatcher.GetLogo(result.Winner.getTeam()));
         imageViewLoserLogo.setImageResource(TeamLogoCatcher.GetLogo(result.Loser.getTeam()));

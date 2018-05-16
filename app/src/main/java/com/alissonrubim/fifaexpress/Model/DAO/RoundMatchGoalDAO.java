@@ -35,6 +35,24 @@ public class RoundMatchGoalDAO {
         return goals;
     }
 
+    public Round.TopScorer GetBestScorePlayer(Round round)
+    {
+        Round.TopScorer topScorer = new Round.TopScorer();
+        Cursor c = database.getReadableDatabase().rawQuery(" SELECT COUNT(R.PlayerId) as Total, R.PlayerId as PlayerId FROM RoundMatchGoal as R " +
+        "    INNER JOIN RoundMatch as RM  on RM.RoundMatchId = R.RoundMatchId " +
+        "    WHERE RM.RoundId = " + round.getRoundId() + " GROUP BY R.PlayerId ORDER BY COUNT(R.PlayerId) DESC", null);
+
+        if (c.moveToFirst()){
+            int playerId = c.getInt(c.getColumnIndex("PlayerId"));
+            topScorer.Player = (new PlayerDAO(Database.Context)).GetById(playerId);
+            topScorer.Goals = c.getInt(c.getColumnIndex("Total"));
+
+        }
+        c.close();
+        database.close();
+        return  topScorer;
+    }
+
 
     public void Insert(Player player, RoundMatch roundMatch){
         ContentValues insertValues = new ContentValues();

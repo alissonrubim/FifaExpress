@@ -93,8 +93,8 @@ public class RoundMatch implements BaseModel {
             goalsLoser = auxG;
         }
 
-        int pointsWinner = 0;
-        int pointsLoser = 0;
+        double pointsWinner = 0;
+        double pointsLoser = 0;
 
         if (goalsWinner != goalsLoser) {
             pointsWinner = 3;
@@ -109,7 +109,7 @@ public class RoundMatch implements BaseModel {
 
 
     public class RoundMatchResult {
-        public RoundMatchResult(Friend winner, Friend loser, boolean even, int winnerPoints, int loserPoints, int winnerGoals, int loserGoals) {
+        public RoundMatchResult(Friend winner, Friend loser, boolean even, double winnerPoints, double loserPoints, int winnerGoals, int loserGoals) {
             Winner = winner;
             Loser = loser;
             Even = even;
@@ -122,8 +122,8 @@ public class RoundMatch implements BaseModel {
         public Friend Winner;
         public Friend Loser;
         public boolean Even;
-        public int WinnerPoints;
-        public int LoserPoints;
+        public double WinnerPoints;
+        public double LoserPoints;
         public int WinnerGoals;
         public int LoserGoals;
     }

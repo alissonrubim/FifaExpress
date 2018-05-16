@@ -41,7 +41,15 @@ public class PlayerDAO implements BaseDAO<Player> {
     
     @Override
     public Player GetById(int id) {
-        return null;
+        Player friend = null;
+        Cursor c = database.getReadableDatabase().rawQuery("SELECT PlayerId, TeamId, Name FROM Player WHERE PlayerId = " + id, null);
+        if (c.moveToFirst()){
+            Team team = (new TeamDAO(database.Context)).GetById(c.getInt(c.getColumnIndex("TeamId")));
+            friend = new Player(c.getInt(c.getColumnIndex("PlayerId")),team, c.getString(c.getColumnIndex("Name")));
+        }
+        c.close();
+        database.close();
+        return friend;
     }
 
     @Override
